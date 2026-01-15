@@ -10,7 +10,8 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: #ffffff;
+  /*background: #ffffff;*/
+  background: #f8f8f7;
 }
 /* .nav {
   display: grid;
@@ -45,6 +46,7 @@
   gap: 1.75rem;
   margin-left: 2rem;
   white-space: nowrap;
+  
 }
 
 /* .nav__cta {

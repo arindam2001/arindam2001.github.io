@@ -13,7 +13,7 @@ window.PROJECTS = [
     title: "Identity-Based Cloud Integrity Auditing with Data Hiding",
     category: "security",
     context: "IIT Delhi • Prof. Huzur Saran (Mar 2025 – Jun 2025)",
-    image: "./assets/images/projects/cloud-auditing.png",
+    image: "./assets/images/projects/p1.png",
     summary: [
       "Designed identity-based cloud integrity auditing with sensitive data sanitization.",
       "Implemented parallel verification, tamper-evident logging, and multi-layered blinding.",
@@ -21,8 +21,8 @@ window.PROJECTS = [
     ],
     tech: ["Cryptography", "Privacy", "Parallel Verification", "Python"],
     links: {
-      github: "https://github.com/arindam2001",
-      report: "./docs/dummy.pdf"
+      github: "https://github.com/arindam2001/Identity-Based-Cloud-Integrity-Auditing-With-Data-Hiding",
+      report: "./docs/p1_report.pdf"
     }
   },
 
@@ -31,7 +31,7 @@ window.PROJECTS = [
     title: "Secure Communication & Web Application Security Testing",
     category: "security",
     context: "IIT Delhi • Prof. Huzur Saran (Mar 2025 – Apr 2025)",
-    image: "./assets/images/projects/cloud-auditing.png",
+    image: "./assets/images/projects/p2.png",
     summary: [
       "Built a TLS client in Python implementing handshake, CA and hostname verification.",
       "Performed web vulnerability assessment using Burp Suite and Nmap/NSE.",
@@ -39,8 +39,8 @@ window.PROJECTS = [
     ],
     tech: ["TLS", "Python", "Wireshark", "Burp Suite", "Nmap"],
     links: {
-      github: "https://github.com/arindam2001",
-      report: "./docs/dummy.pdf"
+      github: "https://github.com/arindam2001/Secure-Communication-Web-Application-Security-Testing",
+      report: "./docs/p2_report.pdf"
     }
   },
 
@@ -49,7 +49,7 @@ window.PROJECTS = [
     title: "Android Application Security Testing",
     category: "security",
     context: "IIT Delhi • Prof. Rajesh Pal (Mar 2025 – May 2025)",
-    image: "./assets/images/projects/android-security.png",
+    image: "./assets/images/projects/p3.png",
     summary: [
       "Audited a vulnerable Android banking app and exploited multiple security flaws.",
       "Bypassed root detection and intercepted traffic using Frida, ADB, and Burp Suite.",
@@ -57,8 +57,8 @@ window.PROJECTS = [
     ],
     tech: ["Android", "Frida", "ADB", "Apktool", "Burp Suite"],
     links: {
-      github: "https://github.com/arindam2001",
-      report: "./docs/dummy.pdf"
+      github: "https://github.com/arindam2001/Android-Application-Security-Testing",
+      report: "./docs/p3_report.pdf"
     }
   },
 
@@ -67,7 +67,7 @@ window.PROJECTS = [
     title: "Cryptographic Secure Messaging System using AES",
     category: "security",
     context: "IIT Delhi • Prof. A.K. Bhateja (Jul 2024 – Sep 2024)",
-    image: "./assets/images/projects/cloud-auditing.png",
+    image: "./assets/images/projects/p4.png",
     summary: [
       "Built an end-to-end encrypted client–server messaging system using AES-CBC.",
       "Ensured confidentiality, integrity, and replay attack prevention using IVs.",
@@ -75,8 +75,8 @@ window.PROJECTS = [
     ],
     tech: ["AES", "PBKDF2", "Python", "SQLite", "Cryptography"],
     links: {
-      github: "https://github.com/arindam2001",
-      report: "./docs/dummy.pdf"
+      github: "https://github.com/arindam2001/Cryptographic-Secure-Messaging-System-using-AES",
+      report: "./docs/p4_report.pdf"
     }
   },
 
@@ -88,7 +88,7 @@ window.PROJECTS = [
     title: "Kernel Enhancements to xv6 Operating System",
     category: "systems",
     context: "IIT Delhi • Prof. Smruti R. Sarangi (Mar 2025 – Jun 2025)",
-    image: "./assets/images/projects/xv6.png",
+    image: "./assets/images/projects/p5.png",
     summary: [
       "Extended xv6 with custom syscalls for auth, signals, and process history.",
       "Implemented priority-based scheduler with profiling and starvation prevention.",
@@ -96,8 +96,8 @@ window.PROJECTS = [
     ],
     tech: ["C", "xv6", "Operating Systems", "Schedulers", "Memory Management"],
     links: {
-      github: "https://github.com/arindam2001",
-      report: "./docs/dummy.pdf"
+      github: "https://github.com/arindam2001/Enhanced_xv6-public-2",
+      report: "./docs/p5_report.pdf"
     }
   },
 
@@ -109,7 +109,7 @@ window.PROJECTS = [
     title: "Reliable Transport Protocol with Concurrency & Congestion Control",
     category: "networking",
     context: "IIT Delhi • Prof. Tarun Mangla (Jul 2024 – Sep 2024)",
-    image: "./assets/images/projects/sdn.png",
+    image: "./assets/images/projects/p6.png",
     summary: [
       "Implemented TCP-like reliable transport over UDP with sliding window and ACKs.",
       "Evaluated Reno and CUBIC under delay/loss using Mininet.",
@@ -117,8 +117,8 @@ window.PROJECTS = [
     ],
     tech: ["Python", "C++", "Sockets", "Mininet", "TCP Reno"],
     links: {
-      github: "https://github.com/arindam2001",
-      report: "./docs/dummy.pdf"
+      github: "https://github.com/arindam2001/Design-and-Implementation-of-Reliable-Transport-Protocol-with-Concurrency-and-Congestion-Control",
+      report: "./docs/p6_report.pdf"
     }
   },
 
@@ -127,7 +127,7 @@ window.PROJECTS = [
     title: "Traffic-Aware SDN Controller for Performance Optimization",
     category: "networking",
     context: "IIT Delhi • Prof. Tarun Mangla (Jul 2024 – Aug 2024)",
-    image: "./assets/images/projects/sdn.png",
+    image: "./assets/images/projects/p7.png",
     summary: [
       "Built SDN apps using Ryu and OpenFlow in Mininet.",
       "Implemented learning switch, STP, and shortest-path routing.",
@@ -135,8 +135,8 @@ window.PROJECTS = [
     ],
     tech: ["SDN", "Ryu", "OpenFlow", "Mininet", "Dijkstra"],
     links: {
-      github: "https://github.com/arindam2001",
-      report: "./docs/dummy.pdf"
+      github: "https://github.com/arindam2001/Traffic-Aware-SDN-Controller-for-Performance-Optimization",
+      report: "./docs/p7_report.pdf"
     }
   },
 
@@ -148,7 +148,7 @@ window.PROJECTS = [
     title: "Decentralized NFT Marketplace (ERC-721)",
     category: "blockchain",
     context: "IIT Delhi • Prof. S.V. Sharma (Aug 2024 – Nov 2024)",
-    image: "./assets/images/projects/blockchain.png",
+    image: "./assets/images/projects/p8.png",
     summary: [
       "Developed ERC-721 smart contracts for NFT minting and trading.",
       "Integrated MetaMask wallet authentication with a React frontend.",
@@ -156,8 +156,8 @@ window.PROJECTS = [
     ],
     tech: ["Solidity", "Ethereum", "Hardhat", "React", "MetaMask"],
     links: {
-      github: "https://github.com/arindam2001",
-      report: "./docs/dummy.pdf"
+      github: "https://github.com/arindam2001/Blockchain-Based-Solution-NFT-Market-Place",
+      report: "./docs/p8_report.pdf"
     }
   },
 
@@ -166,7 +166,7 @@ window.PROJECTS = [
     title: "Supply Chain Management System using Blockchain",
     category: "blockchain",
     context: "B.Tech Major Project • Prof. Surojit Bhattacharyya (Jul 2023 – Apr 2024)",
-    image: "./assets/images/projects/blockchain.png",
+    image: "./assets/images/projects/p9.png",
     summary: [
       "Built a blockchain-backed supply chain tracking system.",
       "Enabled transparent product traceability and ownership transfer.",
@@ -174,8 +174,8 @@ window.PROJECTS = [
     ],
     tech: ["Blockchain", "Solidity", "Web3", "Supply Chain"],
     links: {
-      github: "https://github.com/arindam2001",
-      report: "./docs/dummy.pdf"
+      github: "https://github.com/arindam2001/mckvie-cse-group3-project",
+      report: "./docs/p9_report.pdf"
     }
   },
 
@@ -187,7 +187,7 @@ window.PROJECTS = [
     title: "Hospital Management System (Backend)",
     category: "backend",
     context: "Sure Trust Internship (May 2023 – Oct 2023)",
-    image: "./assets/images/projects/cloud-auditing.png",
+    image: "./assets/images/projects/p10.png",
     summary: [
       "Designed backend modules using Java, JDBC, and Spring Boot.",
       "Built REST APIs and integrated SQL databases.",
@@ -195,8 +195,8 @@ window.PROJECTS = [
     ],
     tech: ["Java", "Spring Boot", "JDBC", "REST", "MySQL"],
     links: {
-      github: "https://github.com/arindam2001",
-      report: "./docs/dummy.pdf"
+      github: "https://github.com/arindam2001/SureTrustHMS",
+      report: "./docs/p10_report.pdf"
     }
   }
 ];
