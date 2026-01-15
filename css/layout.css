@@ -1,0 +1,192 @@
+/* css/layout.css */
+/* =========================
+   Layout & Structure
+   ========================= */
+
+/* =========================
+   Navigation Layout
+   ========================= */
+   .header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #ffffff;
+}
+/* .nav {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+} */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 72px;
+  gap: 1rem;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* .nav__menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+} */
+
+.nav__menu {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  margin-left: 2rem;
+  white-space: nowrap;
+}
+
+/* .nav__cta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+} */
+
+.nav__cta {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+.nav__toggle {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .nav {
+    flex-wrap: nowrap;
+  }
+}
+/* =========================
+   Hero Layout
+   ========================= */
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero__content {
+  max-width: 640px;
+}
+
+.hero__media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* =========================
+   About Layout
+   ========================= */
+.about__grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 32px;
+  align-items: stretch;
+  grid-template-rows: auto auto;
+}
+.about__row {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 32px;
+  align-items: stretch;
+}
+/* .about__text {
+  max-width: 720px;
+} */
+
+.about__cta {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* .about__timeline {
+  display: grid;
+  gap: 16px;
+} */
+.about__text,
+.about__timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+/* =========================
+   Projects Layout
+   ========================= */
+.cards-grid {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================
+   Experience Layout
+   ========================= */
+.exp__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+/* =========================
+   Skills Layout
+   ========================= */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+/* =========================
+   Documents Layout
+   ========================= */
+.docs__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+/* =========================
+   Contact Layout
+   ========================= */
+.contact__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+/* =========================
+   Footer Layout
+   ========================= */
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 18px;
+  align-items: center;
+}
+
+.footer__right {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.honours-card,
+.highlight-card {
+  flex-grow: 1;
+}

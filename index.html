@@ -1,0 +1,620 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Arindam Sal — Cyber Security | Systems | Backend | Blockchain. Portfolio hosted on GitHub Pages." />
+    <title>Arindam Sal | Portfolio</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/layout.css" />
+    <link rel="stylesheet" href="./css/responsive.css" />
+
+    <!-- Favicon (optional) -->
+    <!-- <link rel="icon" href="./assets/icons/favicon.ico" /> -->
+  </head>
+
+  <body>
+    <!-- ====== Skip Link (Accessibility) ====== -->
+    <a class="skip-link" href="#home">Skip to content</a>
+
+    <!-- ====== Header / Nav ====== -->
+    <header class="header" id="top">
+      <nav class="nav container" aria-label="Primary">
+        <a class="brand" href="#home" aria-label="Go to Home">
+          <span class="brand__mark">AS</span>
+          <span class="brand__text">Arindam Sal</span>
+        </a>
+
+        <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
+          <span class="nav__toggle-bar"></span>
+          <span class="nav__toggle-bar"></span>
+          <span class="nav__toggle-bar"></span>
+        </button>
+
+        <div class="nav__menu" id="navMenu">
+          <a class="nav__link" href="#home">Home</a>
+          <a class="nav__link" href="#about">About</a>
+          <a class="nav__link" href="#projects">Research & Projects
+</a>
+          <a class="nav__link" href="#experience">Experience</a>
+          <a class="nav__link" href="#skills">Skills</a>
+          <a class="nav__link" href="#documents">Documents</a>
+          <a class="nav__link" href="#contact">Contact</a>
+        </div>
+
+        <div class="nav__cta">
+          <a class="btn btn--ghost" id="navDownloadCV" href="#documents">Download CV</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- ====== Hero / Home ====== -->
+      <section class="hero" id="home" aria-label="Hero">
+        <div class="hero__bg" aria-hidden="true"></div>
+
+        <div class="container hero__grid">
+          <div class="hero__content">
+            <p class="eyebrow" id="heroEyebrow">M.Tech Cyber Security @ IIT Delhi</p>
+            <h1 class="hero__title">
+              <span id="heroName">ARINDAM SAL</span>
+            </h1>
+
+            <p class="hero__subtitle" id="heroSubtitle">
+              Systems Security • Secure Boot • Trusted Logging • Backend Engineering • Blockchain
+            </p>
+
+            <p class="hero__desc" id="heroDesc">
+              I build secure, performant systems — from automotive ECU secure boot pipelines to privacy-preserving cloud auditing,
+              OS kernel enhancements, and production-style backend services.
+            </p>
+
+            <div class="hero__actions">
+              <a class="btn btn--primary" id="heroDownloadBtn" href="./docs/cv-security.pdf" target="_blank" rel="noopener">
+                Download CV
+              </a>
+              <a class="btn btn--secondary" href="#projects">View Projects</a>
+            </div>
+
+            <div class="hero__meta">
+              <div class="meta-chip">
+                <span class="meta-dot" aria-hidden="true"></span>
+                <span id="heroLocation">Delhi, India</span>
+              </div>
+              <div class="meta-chip">
+                <span class="meta-dot meta-dot--accent" aria-hidden="true"></span>
+                <span id="heroInterest">Cyber Security & Systems</span>
+              </div>
+            </div>
+
+            <div class="hero__social" aria-label="Social links">
+              <a class="icon-link" id="socialGithub" href="https://github.com/arindam2001" target="_blank" rel="noopener" aria-label="GitHub">
+                <img src="./assets/icons/github.svg" alt="" />
+              </a>
+              <a class="icon-link" id="socialLinkedIn" href="https://www.linkedin.com/in/arindam-sal-065289194/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <img src="./assets/icons/linkedin.svg" alt="" />
+              </a>
+              <!--<a class="icon-link" id="socialEmail" href="mailto:arindam.sal.edu@gmail.com" aria-label="Email">
+                <img src="./assets/icons/mail.svg" alt="" />
+              </a>-->
+              <a
+  class="icon-link"
+  id="socialEmail"
+  href="mailto:arindam.sal.edu@gmail.com"
+  aria-label="Email"
+>
+  <img src="./assets/icons/mail.svg" alt="" />
+</a>
+
+            </div>
+          </div>
+
+          <div class="hero__media" aria-label="Profile photo">
+            <div class="profile-card">
+              <div class="profile-card__frame">
+                <img
+                  class="profile-card__img"
+                  src="./assets/images/profile.jpg"
+                  alt="Profile photo of Arindam Sal"
+                  loading="eager"
+                />
+              </div>
+
+              <div class="profile-card__info">
+                <p class="profile-card__name">Arindam Sal</p>
+                <p class="profile-card__role" id="profileRole">Cyber Security • Systems • Backend</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+<!-- ====== About ====== -->
+<section class="section" id="about" aria-label="About">
+  <div class="container">
+    <div class="section__head">
+      <h2 class="section__title">About</h2>
+      <p class="section__subtitle">
+        Early-career computer science engineer and researcher focused on systems security, secure boot, trusted execution, and backend engineering.
+      </p>
+    </div>
+
+    <div class="about__grid">
+
+      <!-- LEFT COLUMN -->
+      <div class="about__text">
+
+        <!-- ROW 1: ABOUT TEXT -->
+        <div class="about__text-main">
+          <p>
+            I’m currently pursuing an <strong>M.Tech in Cyber Security at IIT Delhi</strong>, where my thesis focuses on
+            <strong>Secure Boot and Trusted Logging for Automotive ECUs using HSM &amp; TEE</strong>.
+            I design security stacks that protect embedded platforms against firmware tampering, unauthorized modification, and runtime threats.
+          </p>
+
+          <p>
+            I enjoy working across the boundary of <strong>systems + security</strong> — kernel-level enhancements, cryptographic protocols,
+            secure communications, and performance-aware networking. I also have hands-on experience building backend systems in Java/Spring.
+          </p>
+
+          <p>
+            My recent work includes privacy-preserving cloud integrity auditing, Android and web security testing, reliable transport protocols,
+            SDN routing optimization, and blockchain-based applications.
+          </p>
+        </div>
+
+        <!-- ROW 2: HONOURS -->
+        <div class="honours-card" aria-label="Honours and Achievements">
+          <h3 class="honours-card__title">Honours & Achievements</h3>
+
+          <ul class="honours-list">
+            <li>
+              <a href="./docs/dummy.pdf" target="_blank" rel="noopener">
+                Cracked GATE 2024 — CS/IT & DA
+                <span class="honours-meta">IISc Bangalore</span>
+                <span class="honours-arrow">→</span>
+              </a>
+            </li>
+
+            <li>
+              <a href="./docs/dummy.pdf" target="_blank" rel="noopener">
+                Cracked GATE 2023 — CS/IT & DA
+                <span class="honours-meta">IIT Kanpur</span>
+                <span class="honours-arrow">→</span>
+              </a>
+            </li>
+
+            <li>
+              <a href="./docs/dummy.pdf" target="_blank" rel="noopener">
+                Outstanding TA Award (COL100)
+                <span class="honours-meta">Dept. of CSE, IIT Delhi</span>
+                <span class="honours-arrow">→</span>
+              </a>
+            </li>
+
+            <li>
+              <a href="./docs/dummy.pdf" target="_blank" rel="noopener">
+                Qualified NIELIT STQC 2025 (Written)
+                <span class="honours-meta">Issued by NIELIT</span>
+                <span class="honours-arrow">→</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="about__timeline">
+
+        <!-- ROW 1: EDUCATION -->
+        <div class="timeline-card">
+          <h3 class="timeline-card__title">Education</h3>
+
+          <ul class="timeline" id="educationTimeline">
+            <li class="timeline__item">
+              <div class="timeline__dot"></div>
+              <div class="timeline__content">
+                <p class="timeline__when">M.Tech — Cyber Security <span class="year">(2024–2026)</span></p>
+                <p class="timeline__where">IIT Delhi • CGPA 7.55</p>
+              </div>
+            </li>
+
+            <li class="timeline__item">
+              <div class="timeline__dot"></div>
+              <div class="timeline__content">
+                <p class="timeline__when">B.Tech — Computer Science & Engineering <span class="year">(2020–2024)</span></p>
+                <p class="timeline__where">MCKV Institute of Engineering • CGPA 9.59</p>
+              </div>
+            </li>
+
+            <li class="timeline__item">
+              <div class="timeline__dot"></div>
+              <div class="timeline__content">
+                <p class="timeline__when">Class XII <span class="year">(2020)</span></p>
+                <p class="timeline__where">Santragachi Kedarnath Institution • 83.6%</p>
+              </div>
+            </li>
+
+            <li class="timeline__item">
+              <div class="timeline__dot"></div>
+              <div class="timeline__content">
+                <p class="timeline__when">Class X <span class="year">(2018)</span></p>
+                <p class="timeline__where">Tatarpur High School • 92.71%</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- ROW 2: THESIS -->
+        <div class="highlight-card" aria-label="Thesis highlight">
+          <div class="highlight-card__top">
+            <p class="highlight-card__eyebrow">Thesis @ IIT Delhi</p>
+
+            <h3 class="highlight-card__title">
+              <a href="./docs/thesis.pdf" target="_blank" rel="noopener">
+                Secure Boot &amp; Trusted Logging for Automotive ECUs
+              </a>
+            </h3>
+
+            <p class="highlight-card__meta">Supervisor: Prof. Kolin Paul</p>
+          </div>
+
+          <ul class="highlight-card__list">
+            <li>Multi-stage validation (Bootloader → U-Boot → Monitor)</li>
+            <li>HSM-backed key storage + TEE-protected runtime</li>
+            <li>~5% verification overhead for 100% authenticated execution</li>
+          </ul>
+
+          <a
+            href="./docs/thesis.pdf"
+            target="_blank"
+            rel="noopener"
+            class="highlight-card__media thesis-media"
+            aria-label="Open thesis PDF"
+          >
+            <img
+              src="./assets/images/thesis/hsm-tee-architecture.png"
+              alt="HSM & TEE architecture diagram"
+              loading="lazy"
+            />
+
+            <div class="thesis-overlay">
+              <span class="thesis-cta">Know more →</span>
+            </div>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+      <!-- ====== Research & Projects ====== -->
+      <section class="section section--alt" id="projects" aria-label="Research and Projects">
+        <div class="container">
+          <div class="section__head">
+            <h2 class="section__title">Research &amp; Projects</h2>
+            <p class="section__subtitle">
+              A curated set of projects across security, systems, networking/SDN, blockchain, and backend development.
+            </p>
+          </div>
+
+          <div class="filters" aria-label="Project filters">
+            <button class="filter is-active" data-filter="all">All</button>
+            <button class="filter" data-filter="security">Security</button>
+            <button class="filter" data-filter="systems">Systems</button>
+            <button class="filter" data-filter="networking">Networking/SDN</button>
+            <button class="filter" data-filter="blockchain">Blockchain</button>
+            <button class="filter" data-filter="backend">Web/Backend</button>
+          </div>
+
+          <div class="cards-grid" id="projectsGrid" aria-label="Project cards">
+            <!-- Rendered by JS from ./js/projects.js -->
+            <div class="card card--skeleton" aria-hidden="true"></div>
+            <div class="card card--skeleton" aria-hidden="true"></div>
+            <div class="card card--skeleton" aria-hidden="true"></div>
+          </div>
+
+          
+        </div>
+      </section>
+
+      <!-- ====== Experience & Teaching ====== -->
+      <section class="section" id="experience" aria-label="Experience and Teaching">
+        <div class="container">
+          <div class="section__head">
+            <h2 class="section__title">Experience &amp; Teaching</h2>
+            <p class="section__subtitle">Backend internship + IIT Delhi teaching roles and academic contributions.</p>
+          </div>
+
+          <div class="exp__grid">
+            <article class="exp-card">
+              <h3 class="exp-card__title">Sure Trust — Java Backend Developer</h3>
+              <p class="exp-card__meta">May 2023 – Oct 2023 • Hospital Management System</p>
+              <ul class="exp-card__list">
+                <li>Developed backend modules using Java, JDBC, Servlets/JSP, Hibernate, Spring Framework/Spring Boot.</li>
+                <li>Built REST APIs and integrated SQL database for robust, secure data operations.</li>
+                <li>Focused on scalable design, clean layering, and practical security considerations.</li>
+              </ul>
+              <div class="tags">
+                <span class="tag">Java</span>
+                <span class="tag">Spring Boot</span>
+                <span class="tag">Hibernate</span>
+                <span class="tag">REST</span>
+                <span class="tag">SQL</span>
+              </div>
+            </article>
+
+            <article class="exp-card">
+              <h3 class="exp-card__title">Teaching Assistant — IIT Delhi</h3>
+              <p class="exp-card__meta">On-campus • 2025 – Present</p>
+
+              <div class="exp-card__group">
+                <h4 class="exp-card__role">COL7160 — Quantum Computing (TA)</h4>
+                <p class="exp-card__when">Jan 2026 – Present</p>
+              </div>
+
+              <div class="exp-card__group">
+                <h4 class="exp-card__role">COL106 — Data Structures &amp; Algorithms (TA)</h4>
+                <p class="exp-card__when">Jul 2025 – Jan 2026</p>
+                <ul class="exp-card__list">
+                  <li>Conducted labs, evaluated assignments, and supported debugging + conceptual clarity in C++.</li>
+                </ul>
+              </div>
+
+              <div class="exp-card__group">
+                <h4 class="exp-card__role">COL100 — Introduction to Computer Science (TA)</h4>
+                <p class="exp-card__when">Jan 2025 – Jun 2025</p>
+                <ul class="exp-card__list">
+                  <li>Helped students with Python fundamentals, recursion, ADTs, and algorithmic thinking.</li>
+                  <li><strong>Award:</strong> Outstanding Teaching Assistant (2024–25)</li>
+                </ul>
+              </div>
+
+              <div class="tags">
+                <span class="tag">Teaching</span>
+                <span class="tag">C++</span>
+                <span class="tag">Python</span>
+                <span class="tag">Algorithms</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== Skills ====== -->
+      <section class="section section--alt" id="skills" aria-label="Skills">
+        <div class="container">
+          <div class="section__head">
+            <h2 class="section__title">Skills</h2>
+            <p class="section__subtitle">A practical stack across programming, security tooling, systems, and backend development.</p>
+          </div>
+
+          <div class="skills-grid" id="skillsGrid">
+            <!-- You can keep this static OR render via JS later -->
+            <div class="skills-card">
+              <h3 class="skills-card__title">Programming</h3>
+              <ul class="skills-list">
+                <li>C (Proficient)</li>
+                <li>C++ (STL)</li>
+                <li>Python</li>
+                <li>Java</li>
+                <li>SQL</li>
+                <li>Solidity (Basics)</li>
+              </ul>
+            </div>
+
+            <div class="skills-card">
+              <h3 class="skills-card__title">Frameworks &amp; Libraries</h3>
+              <ul class="skills-list">
+                <li>JDBC</li>
+                <li>Servlets/JSP</li>
+                <li>Spring / Spring Boot</li>
+                <li>Hibernate</li>
+              </ul>
+            </div>
+
+            <div class="skills-card">
+              <h3 class="skills-card__title">Security &amp; Networking Tools</h3>
+              <ul class="skills-list">
+                <li>Wireshark</li>
+                <li>Burp Suite</li>
+                <li>Nmap / NSE</li>
+                <li>ADB</li>
+                <li>Frida</li>
+                <li>Jadx-GUI</li>
+                <li>Apktool</li>
+              </ul>
+            </div>
+
+            <div class="skills-card">
+              <h3 class="skills-card__title">Blockchain &amp; Distributed</h3>
+              <ul class="skills-list">
+                <li>Hardhat</li>
+                <li>MetaMask</li>
+                <li>IPFS / Pinata</li>
+              </ul>
+            </div>
+
+            <div class="skills-card">
+              <h3 class="skills-card__title">Databases &amp; Dev Tools</h3>
+              <ul class="skills-list">
+                <li>Git</li>
+                <li>Linux</li>
+                <li>MySQL</li>
+                <li>SQLite</li>
+              </ul>
+            </div>
+
+            <div class="skills-card">
+              <h3 class="skills-card__title">Networking/SDN</h3>
+              <ul class="skills-list">
+                <li>Mininet</li>
+                <li>Ryu SDN</li>
+                <li>OpenFlow</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== Documents ====== -->
+      <section class="section" id="documents" aria-label="Documents">
+        <div class="container">
+          <div class="section__head">
+            <h2 class="section__title">Documents</h2>
+            <p class="section__subtitle">CVs and supporting documents.</p>
+          </div>
+
+          <div class="docs__grid">
+            <div class="docs-block">
+              <h3 class="docs-block__title">Download CV</h3>
+              <div class="docs-actions" id="cvButtons" aria-label="CV download buttons">
+                <!-- Rendered by JS from documents.js -->
+                <a class="btn btn--primary" href="./docs/cv-security.pdf" target="_blank" rel="noopener">Security CV (PDF)</a>
+                <a class="btn btn--secondary" href="./docs/cv-sde.pdf" target="_blank" rel="noopener">SDE CV (PDF)</a>
+                <a class="btn btn--ghost" href="./docs/cv-systems.pdf" target="_blank" rel="noopener">Systems CV (PDF)</a>
+              </div>
+            </div>
+
+            <div class="docs-block">
+              <h3 class="docs-block__title">Other Documents</h3>
+              <div class="docs-list" id="otherDocs" aria-label="Other documents list">
+                <!-- Rendered by JS from documents.js -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== Contact ====== -->
+      <section class="section section--alt" id="contact" aria-label="Contact">
+        <div class="container">
+          <div class="section__head">
+            <h2 class="section__title">Contact</h2>
+            <p class="section__subtitle">Open to research collaborations, security/systems roles, and backend engineering opportunities.</p>
+          </div>
+
+          <div class="contact__grid">
+            <div class="contact-card">
+              <h3 class="contact-card__title">Reach out</h3>
+              <p class="contact-card__text">
+                Email is the fastest way to contact me. You can also connect via LinkedIn/GitHub.
+              </p>
+
+              <div class="contact-items">
+                <a class="contact-item" id="contactEmail" href="mailto:arindam.sal.edu@gmail.com">
+                  <span class="contact-item__label">Email</span>
+                  <span class="contact-item__value" id="contactEmailText">arindam.sal.edu@gmail.com</span>
+                </a>
+                <div class="contact-item">
+                  <span class="contact-item__label">Location</span>
+                  <span class="contact-item__value" id="contactLocation">Delhi, India</span>
+                </div>
+              </div>
+
+              <div class="contact-social" aria-label="Social links">
+                <a class="icon-link" id="contactGithub" href="https://github.com/arindam2001" target="_blank" rel="noopener" aria-label="GitHub">
+                  <img src="./assets/icons/github.svg" alt="" />
+                </a>
+                <a class="icon-link" id="contactLinkedIn" href="https://www.linkedin.com/in/arindam-sal-065289194/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                  <img src="./assets/icons/linkedin.svg" alt="" />
+                </a>
+                <a class="icon-link" id="contactFacebook" href="https://www.facebook.com/arindam.sal/" target="_blank" rel="noopener" aria-label="Facebook">
+                  <!-- If you didn't create facebook.svg, this will still work if you add it later -->
+                  <span class="icon-fallback">f</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="contact-card">
+              <h3 class="contact-card__title">Quick message</h3>
+
+              <!-- No backend: shows success message + can also open mail client -->
+              <!--<form
+                id="contactForm"
+                class="form"
+                autocomplete="on"
+                action="https://formspree.io/f/xjggkwbb"
+                method="POST"
+                >
+                <input type="hidden" name="_next" value="http://localhost:5518/#contact">
+            -->
+                <form id="contactForm" class="form" autocomplete="on">
+
+
+                <label class="field">
+                  <span class="field__label">Your name</span>
+                  <input class="field__input" type="text" name="name" placeholder="Enter your name" required />
+                </label>
+
+                <label class="field">
+                  <span class="field__label">Your email</span>
+                  <input class="field__input" type="email" name="email" placeholder="Enter your email" required />
+                </label>
+
+                <label class="field">
+                  <span class="field__label">Message</span>
+                  <textarea class="field__input field__textarea" name="message" rows="5" placeholder="Write a message..." required></textarea>
+                </label>
+
+                <div class="form__actions">
+                  <button class="btn btn--primary" type="submit">Send</button>
+                  <button class="btn btn--ghost" type="button" id="mailtoBtn">Open Mail App</button>
+                </div>
+
+                <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ====== Footer ====== -->
+    <footer class="footer" aria-label="Footer">
+      <div class="container footer__grid">
+        <div class="footer__left">
+          <p class="footer__brand">Arindam Sal</p>
+          <p class="footer__small">Cyber Security • Systems • Backend • Blockchain</p>
+        </div>
+
+        <div class="footer__right">
+          <a class="footer__link" href="#home">Home</a>
+          <a class="footer__link" href="#about">About</a>
+          <a class="footer__link" href="#projects">Projects</a>
+          <a class="footer__link" href="#documents">Documents</a>
+          <a class="footer__link" href="#contact">Contact</a>
+        </div>
+      </div>
+
+      <div class="container footer__bottom">
+        <p class="footer__copyright">
+          © <span id="year"></span> Arindam Sal. Built for GitHub Pages.
+        </p>
+        <a class="footer__top" href="#top" aria-label="Back to top">↑</a>
+      </div>
+    </footer>
+
+    <!-- ====== JS (data + UI) ====== -->
+    <script src="./js/config.js" defer></script>
+    <script src="./js/projects.js" defer></script>
+    <script src="./js/documents.js" defer></script>
+    <script src="./js/ui.js" defer></script>
+    <script src="./js/main.js" defer></script>
+  </body>
+</html>

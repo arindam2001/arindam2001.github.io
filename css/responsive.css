@@ -1,0 +1,153 @@
+/* css/responsive.css */
+/* =========================
+   Responsive & Mobile Styles
+   ========================= */
+
+/* =========================
+   Tablet (≤ 1024px)
+   ========================= */
+@media (max-width: 1024px) {
+  .hero__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .hero__media {
+    order: -1;
+  }
+
+  .about__grid,
+  .docs__grid,
+  .contact__grid,
+  .exp__grid,
+  .skills-grid,
+  .footer__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__right {
+    justify-content: flex-start;
+  }
+}
+
+/* =========================
+   Mobile (≤ 768px)
+   ========================= */
+@media (max-width: 768px) {
+  :root {
+    --nav-height: 72px;
+  }
+
+  .section {
+    padding: 56px 0;
+  }
+
+  /* ===== Navigation (Hamburger) ===== */
+  .nav {
+    position: relative;
+  }
+
+  .nav__toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav__menu {
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    align-items: stretch;
+    padding: 14px 16px;
+    gap: 6px;
+    display: none;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+    z-index: 999;
+  }
+
+  .nav__menu.is-open {
+    display: flex;
+  }
+
+  .nav__link {
+    padding: 12px 14px;
+    font-size: 1rem;
+  }
+
+  /* Hide navbar CTA on mobile */
+  .nav__cta {
+    display: none;
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    padding-top: 56px;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 6vw, 2.6rem);
+  }
+
+  .hero__subtitle {
+    font-size: 1rem;
+  }
+
+  .hero__desc {
+    font-size: 0.95rem;
+  }
+
+  .hero__actions {
+    gap: 10px;
+  }
+
+  .hero__meta {
+    gap: 8px;
+  }
+
+  .profile-card {
+    max-width: 320px;
+    margin-inline: auto;
+  }
+
+  /* ===== Projects ===== */
+  .filters {
+    gap: 8px;
+  }
+
+  .filter {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+
+  /* ===== Contact ===== */
+  .contact-card {
+    padding: 14px;
+  }
+
+  /* ===== Footer ===== */
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
+/* =========================
+   Small Phones (≤ 480px)
+   ========================= */
+@media (max-width: 480px) {
+  .hero__actions,
+  .docs-actions,
+  .footer__right {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
