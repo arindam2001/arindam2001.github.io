@@ -13,6 +13,99 @@
   const $$ = (sel) => document.querySelectorAll(sel);
 
   /* =========================
+     Animated Background Blob
+     ========================= */
+  (function createBlob() {
+    const blob = document.createElement("div");
+    blob.className = "bg-blob";
+    blob.setAttribute("aria-hidden", "true");
+    blob.innerHTML = `
+      <div class="bg-blob__circle bg-blob__circle--1"></div>
+      <div class="bg-blob__circle bg-blob__circle--2"></div>
+      <div class="bg-blob__circle bg-blob__circle--3"></div>
+    `;
+    document.body.prepend(blob);
+  })();
+
+  /* =========================
+     Scroll Reveal Animations
+     ========================= */
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!prefersReducedMotion) {
+    // Mark elements for reveal
+    const revealSelectors = [
+      ".section__head",
+      ".about__text-main",
+      ".honours-card",
+      ".timeline-card",
+      ".highlight-card",
+      ".card",
+      ".exp-card",
+      ".skills-card",
+      ".docs-block",
+      ".contact-card",
+      ".footer__grid"
+    ];
+
+    // Add stagger containers
+    const staggerContainers = [
+      ".cards-grid",
+      ".skills-grid",
+      ".exp__grid"
+    ];
+
+    staggerContainers.forEach((sel) => {
+      document.querySelectorAll(sel).forEach((el) => {
+        el.classList.add("reveal-stagger");
+      });
+    });
+
+    // Add reveal class to all target elements
+    revealSelectors.forEach((sel) => {
+      document.querySelectorAll(sel).forEach((el) => {
+        el.classList.add("reveal");
+      });
+    });
+
+    // Set up IntersectionObserver
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        rootMargin: "0px 0px -60px 0px",
+        threshold: 0.05
+      }
+    );
+
+    document.querySelectorAll(".reveal").forEach((el) => {
+      revealObserver.observe(el);
+    });
+
+    // Re-observe after projects are re-rendered (filter clicks)
+    const projectsGrid = $("projectsGrid");
+    if (projectsGrid) {
+      const filterObserver = new MutationObserver(() => {
+        projectsGrid.querySelectorAll(".card").forEach((card) => {
+          card.classList.add("reveal");
+          // Small delay to allow the browser to register the initial state
+          requestAnimationFrame(() => {
+            revealObserver.observe(card);
+          });
+        });
+      });
+
+      filterObserver.observe(projectsGrid, { childList: true });
+    }
+  }
+
+  /* =========================
      Smooth Scroll (Optional)
      ========================= */
   if (window.SITE_CONFIG?.ui?.enableSmoothScroll) {
