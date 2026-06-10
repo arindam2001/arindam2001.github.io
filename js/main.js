@@ -106,6 +106,28 @@
   }
 
   /* =========================
+     Pointer Parallax (Hero)
+     ========================= */
+  if (!prefersReducedMotion && window.matchMedia("(pointer: fine)").matches) {
+    const blob = document.querySelector(".bg-blob");
+    const heroMedia = document.querySelector(".hero__media");
+    let ticking = false;
+
+    window.addEventListener("pointermove", (e) => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const x = e.clientX / window.innerWidth - 0.5;
+        const y = e.clientY / window.innerHeight - 0.5;
+        // Move the blob container (inner circles keep their float animation)
+        if (blob) blob.style.transform = `translate(${x * 24}px, ${y * 24}px)`;
+        if (heroMedia) heroMedia.style.transform = `translate(${x * -12}px, ${y * -12}px)`;
+        ticking = false;
+      });
+    });
+  }
+
+  /* =========================
      Smooth Scroll (Optional)
      ========================= */
   if (window.SITE_CONFIG?.ui?.enableSmoothScroll) {

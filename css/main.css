@@ -1890,3 +1890,71 @@ a.contact-item:hover {
   color: var(--text);
   font-weight: 700;
 }
+
+/* =========================================================
+   MODERNIZATION LAYER — Phase 3: Hero
+   (appended overrides; kept separate from base rules)
+   ========================================================= */
+
+/* Faint dot-grid texture behind the hero, masked to fade out */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(148, 163, 184, 0.07) 1px, transparent 1px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(circle at 28% 32%, #000, transparent 72%);
+  mask-image: radial-gradient(circle at 28% 32%, #000, transparent 72%);
+}
+
+/* Animated gradient shimmer on the hero name */
+.hero__title {
+  background-size: 220% auto;
+  animation: nameShimmer 7s linear infinite;
+}
+
+@keyframes nameShimmer {
+  to { background-position: 220% center; }
+}
+
+/* Ambient glow behind the profile card (sits behind, no clipping) */
+.hero__media {
+  position: relative;
+}
+
+.hero__media::before {
+  content: "";
+  position: absolute;
+  inset: 8% 6%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(34, 211, 238, 0.20),
+    rgba(167, 139, 250, 0.14) 50%,
+    transparent 72%
+  );
+  filter: blur(46px);
+  animation: mediaGlow 9s ease-in-out infinite alternate;
+}
+
+@keyframes mediaGlow {
+  from { transform: scale(0.92) translateY(6px); opacity: 0.65; }
+  to   { transform: scale(1.08) translateY(-8px); opacity: 1; }
+}
+
+/* Gradient-border treatment for the secondary CTA */
+.btn--secondary {
+  background:
+    linear-gradient(var(--surface-solid), var(--surface-solid)) padding-box,
+    linear-gradient(135deg, rgba(34, 211, 238, 0.45), rgba(167, 139, 250, 0.45)) border-box;
+  border: 1px solid transparent;
+}
+
+.btn--secondary:hover {
+  background:
+    linear-gradient(var(--surface-solid), var(--surface-solid)) padding-box,
+    linear-gradient(135deg, var(--accent), var(--accent-2)) border-box;
+}
