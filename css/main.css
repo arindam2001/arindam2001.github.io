@@ -1999,3 +1999,60 @@ a.contact-item:hover {
 .about__bento .honours-list {
   grid-template-columns: repeat(2, 1fr);
 }
+
+/* =========================================================
+   MODERNIZATION LAYER — Phase 5: Projects Bento + Spotlight
+   ========================================================= */
+
+/* Bento rhythm: periodic featured (wide) cards on large screens */
+@media (min-width: 980px) {
+  #projectsGrid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-flow: row dense;
+  }
+
+  #projectsGrid .card:nth-child(6n + 1) {
+    grid-column: span 2;
+  }
+}
+
+/* Cursor-tracked spotlight highlight on each card */
+.card {
+  --mx: 50%;
+  --my: 50%;
+  position: relative;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(
+    340px circle at var(--mx) var(--my),
+    rgba(34, 211, 238, 0.12),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity var(--duration-base) ease;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+/* Filter polish — clearer active state + tactile press */
+.filter {
+  letter-spacing: 0.01em;
+}
+
+.filter.is-active {
+  box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.15),
+              0 4px 16px rgba(34, 211, 238, 0.10);
+}
+
+.filter:active {
+  transform: translateY(0) scale(0.97);
+}

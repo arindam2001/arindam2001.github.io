@@ -135,6 +135,20 @@
   renderProjects();
 
   /* =========================
+     Card Spotlight (cursor-tracked)
+     Delegated so it survives filter re-renders
+     ========================= */
+  if (projectsGrid && window.matchMedia("(pointer: fine)").matches) {
+    projectsGrid.addEventListener("pointermove", (e) => {
+      const card = e.target.closest(".card");
+      if (!card) return;
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+      card.style.setProperty("--my", `${e.clientY - rect.top}px`);
+    });
+  }
+
+  /* =========================
      Project Filters
      ========================= */
   $$(".filter").forEach((btn) => {
