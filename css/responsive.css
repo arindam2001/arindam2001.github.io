@@ -25,6 +25,11 @@
     grid-template-columns: 1fr;
   }
 
+  /* Bento tiles stack full-width (drop the 12-col spans) */
+  .about__bento > * {
+    grid-column: auto;
+  }
+
   .footer__right {
     justify-content: flex-start;
   }
@@ -134,6 +139,11 @@
   }
 
   .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* ===== About bento ===== */
+  .about__bento .honours-list {
     grid-template-columns: 1fr;
   }
 

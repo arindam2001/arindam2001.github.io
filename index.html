@@ -183,13 +183,10 @@
       </p>
     </div>
 
-    <div class="about__grid">
+    <div class="about__grid about__bento">
 
-      <!-- LEFT COLUMN -->
-      <div class="about__text">
-
-        <!-- ROW 1: ABOUT TEXT -->
-        <div class="about__text-main">
+      <!-- TILE: ABOUT TEXT -->
+      <div class="about__text-main bento-tile bento-tile--intro">
           <p>
             I’m currently pursuing an <strong>M.Tech in Cyber Security at IIT Delhi</strong>, where my thesis focuses on
             <strong>Secure Boot and Trusted Logging for Automotive ECUs using HSM &amp; TEE</strong>.
@@ -207,8 +204,47 @@
           </p>
         </div>
 
-        <!-- ROW 2: HONOURS -->
-        <div class="honours-card" aria-label="Honours and Achievements">
+      <!-- TILE: EDUCATION -->
+      <div class="timeline-card bento-tile bento-tile--edu">
+        <h3 class="timeline-card__title">Education</h3>
+
+        <ul class="timeline" id="educationTimeline">
+          <li class="timeline__item">
+            <div class="timeline__dot"></div>
+            <div class="timeline__content">
+              <p class="timeline__when">M.Tech — Cyber Security <span class="year">(2024–2026)</span></p>
+              <p class="timeline__where">IIT Delhi • CGPA 7.55</p>
+            </div>
+          </li>
+
+          <li class="timeline__item">
+            <div class="timeline__dot"></div>
+            <div class="timeline__content">
+              <p class="timeline__when">B.Tech — Computer Science & Engineering <span class="year">(2020–2024)</span></p>
+              <p class="timeline__where">MCKV Institute of Engineering • CGPA 9.59</p>
+            </div>
+          </li>
+
+          <li class="timeline__item">
+            <div class="timeline__dot"></div>
+            <div class="timeline__content">
+              <p class="timeline__when">Class XII <span class="year">(2020)</span></p>
+              <p class="timeline__where">Santragachi Kedarnath Institution • 83.6%</p>
+            </div>
+          </li>
+
+          <li class="timeline__item">
+            <div class="timeline__dot"></div>
+            <div class="timeline__content">
+              <p class="timeline__when">Class X <span class="year">(2018)</span></p>
+              <p class="timeline__where">Tatarpur High School • 92.71%</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- TILE: HONOURS -->
+        <div class="honours-card bento-tile bento-tile--honours" aria-label="Honours and Achievements">
           <h3 class="honours-card__title">Honours & Achievements</h3>
 
           <ul class="honours-list">
@@ -246,52 +282,8 @@
           </ul>
         </div>
 
-      </div>
-
-      <!-- RIGHT COLUMN -->
-      <div class="about__timeline">
-
-        <!-- ROW 1: EDUCATION -->
-        <div class="timeline-card">
-          <h3 class="timeline-card__title">Education</h3>
-
-          <ul class="timeline" id="educationTimeline">
-            <li class="timeline__item">
-              <div class="timeline__dot"></div>
-              <div class="timeline__content">
-                <p class="timeline__when">M.Tech — Cyber Security <span class="year">(2024–2026)</span></p>
-                <p class="timeline__where">IIT Delhi • CGPA 7.55</p>
-              </div>
-            </li>
-
-            <li class="timeline__item">
-              <div class="timeline__dot"></div>
-              <div class="timeline__content">
-                <p class="timeline__when">B.Tech — Computer Science & Engineering <span class="year">(2020–2024)</span></p>
-                <p class="timeline__where">MCKV Institute of Engineering • CGPA 9.59</p>
-              </div>
-            </li>
-
-            <li class="timeline__item">
-              <div class="timeline__dot"></div>
-              <div class="timeline__content">
-                <p class="timeline__when">Class XII <span class="year">(2020)</span></p>
-                <p class="timeline__where">Santragachi Kedarnath Institution • 83.6%</p>
-              </div>
-            </li>
-
-            <li class="timeline__item">
-              <div class="timeline__dot"></div>
-              <div class="timeline__content">
-                <p class="timeline__when">Class X <span class="year">(2018)</span></p>
-                <p class="timeline__where">Tatarpur High School • 92.71%</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        <!-- ROW 2: THESIS -->
-        <div class="highlight-card" aria-label="Thesis highlight">
+      <!-- TILE: THESIS -->
+        <div class="highlight-card bento-tile bento-tile--thesis" aria-label="Thesis highlight">
           <div class="highlight-card__top">
             <p class="highlight-card__eyebrow">Thesis @ IIT Delhi</p>
 
@@ -328,8 +320,6 @@
             </div>
           </a>
         </div>
-
-      </div>
 
     </div>
   </div>
