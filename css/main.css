@@ -2056,3 +2056,72 @@ a.contact-item:hover {
 .filter:active {
   transform: translateY(0) scale(0.97);
 }
+
+/* =========================================================
+   MODERNIZATION LAYER — Phase 6: Section polish
+   (Experience / Skills / Documents / Contact)
+   ========================================================= */
+
+/* Gradient kicker bar under every section title — unifies the page */
+.section__head .section__title {
+  position: relative;
+  display: inline-block;
+  padding-bottom: var(--sp-3);
+}
+
+.section__head .section__title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 56px;
+  height: 3px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
+/* Consistent accent hairline on hover across remaining cards */
+.exp-card,
+.skills-card,
+.docs-block,
+.contact-card {
+  position: relative;
+}
+
+.skills-card::after,
+.docs-block::after,
+.contact-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.4), transparent);
+  opacity: 0;
+  transition: opacity var(--duration-base) ease;
+}
+
+.skills-card:hover::after,
+.docs-block:hover::after,
+.contact-card:hover::after {
+  opacity: 1;
+}
+
+/* Skills: accent dot before each card title */
+.skills-card__title {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.skills-card__title::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 0 8px rgba(34, 211, 238, 0.4);
+}
