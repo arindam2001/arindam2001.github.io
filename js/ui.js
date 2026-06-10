@@ -44,6 +44,18 @@
     $("heroLocation") && ($("heroLocation").textContent = c.location);
     $("profileRole") && ($("profileRole").textContent = c.role);
 
+    if (c.currentJob) {
+      const job = c.currentJob;
+      $("heroNowRole") && ($("heroNowRole").textContent = job.role);
+      $("heroNowCompany") &&
+        ($("heroNowCompany").textContent = job.companyShort || job.company);
+      const nowLogoImg = document.querySelector("#heroNowLogo img");
+      if (nowLogoImg && job.logo) {
+        nowLogoImg.src = job.logo;
+        nowLogoImg.alt = `${job.company} logo`;
+      }
+    }
+
     $("socialGithub") && ($("socialGithub").href = c.social.github);
     $("socialLinkedIn") && ($("socialLinkedIn").href = c.social.linkedin);
     $("socialEmail") && ($("socialEmail").href = `mailto:${c.email}`);

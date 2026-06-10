@@ -67,7 +67,30 @@
 
         <div class="container hero__grid">
           <div class="hero__content">
-            <p class="eyebrow" id="heroEyebrow">M.Tech Cyber Security @ IIT Delhi</p>
+            <p class="eyebrow eyebrow--with-logo">
+              <span class="eyebrow__logo">
+                <img src="./assets/images/iit_delhi.png" alt="IIT Delhi logo" loading="eager" />
+              </span>
+              <span id="heroEyebrow">M.Tech Cyber Security @ IIT Delhi</span>
+            </p>
+
+            <a class="now-badge" id="heroNowBadge" href="#experience" aria-label="Current role: Software Engineer at SKETS Griphic Private Limited">
+              <span class="now-badge__logo" id="heroNowLogo">
+                <img src="./assets/images/griphic_logo.jpg" alt="SKETS Griphic Private Limited logo" loading="eager" />
+              </span>
+              <span class="now-badge__text">
+                <span class="now-badge__label">
+                  <span class="now-badge__pulse" aria-hidden="true"></span>
+                  Currently
+                </span>
+                <span class="now-badge__role">
+                  <span id="heroNowRole">Software Engineer</span>
+                  <span class="now-badge__sep" aria-hidden="true">·</span>
+                  <span class="now-badge__company" id="heroNowCompany">SKETS Griphic</span>
+                </span>
+              </span>
+            </a>
+
             <h1 class="hero__title">
               <span id="heroName">ARINDAM SAL</span>
             </h1>
@@ -339,14 +362,50 @@
         <div class="container">
           <div class="section__head">
             <h2 class="section__title">Experience &amp; Teaching</h2>
-            <p class="section__subtitle">Backend internship + IIT Delhi teaching roles and academic contributions.</p>
+            <p class="section__subtitle">Current full-time engineering role, a backend internship, and IIT Delhi teaching roles and academic contributions.</p>
           </div>
 
           <div class="exp__grid">
-            <article class="exp-card">
-              <h3 class="exp-card__title">Sure Trust — Java Backend Developer</h3>
-              <p class="exp-card__meta">May 2023 – Oct 2023 • Hospital Management System</p>
+            <article class="exp-card exp-card--current">
+              <div class="exp-card__head">
+                <span class="exp-card__logo">
+                  <img src="./assets/images/griphic_logo.jpg" alt="SKETS Griphic Private Limited logo" loading="lazy" />
+                </span>
+                <div class="exp-card__heading">
+                  <h3 class="exp-card__title">Software Engineer</h3>
+                  <p class="exp-card__company">SKETS Griphic Private Limited</p>
+                </div>
+                <span class="exp-card__badge">
+                  <span class="exp-card__badge-dot" aria-hidden="true"></span>
+                  Current
+                </span>
+              </div>
+
+              <p class="exp-card__meta">Jun 2026 – Present • Full-time</p>
               <ul class="exp-card__list">
+                <li>Building and shipping production software as part of the engineering team.</li>
+                <!-- Update with your specific responsibilities, products, and impact -->
+              </ul>
+              <div class="tags">
+                <span class="tag">Software Engineering</span>
+                <span class="tag">Backend</span>
+              </div>
+            </article>
+
+            <article class="exp-card exp-card--wide">
+              <div class="exp-card__head">
+                <span class="exp-card__logo exp-card__logo--light">
+                  <img src="./assets/images/suretrust.png" alt="SURE Trust logo" loading="lazy" />
+                </span>
+                <div class="exp-card__heading">
+                  <h3 class="exp-card__title">Java Backend Developer</h3>
+                  <p class="exp-card__company">SURE Trust • Internship</p>
+                </div>
+                <span class="exp-card__when-pill">May 2023 – Oct 2023</span>
+              </div>
+
+              <p class="exp-card__meta">Hospital Management System</p>
+              <ul class="exp-card__list exp-card__list--grid">
                 <li>Developed backend modules using Java, JDBC, Servlets/JSP, Hibernate, Spring Framework/Spring Boot.</li>
                 <li>Built REST APIs and integrated SQL database for robust, secure data operations.</li>
                 <li>Focused on scalable design, clean layering, and practical security considerations.</li>
@@ -360,30 +419,40 @@
               </div>
             </article>
 
-            <article class="exp-card">
-              <h3 class="exp-card__title">Teaching Assistant — IIT Delhi</h3>
-              <p class="exp-card__meta">On-campus • 2025 – Present</p>
-
-              <div class="exp-card__group">
-                <h4 class="exp-card__role">COL7160 — Quantum Computing (TA)</h4>
-                <p class="exp-card__when">Jan 2026 – Present</p>
+            <article class="exp-card exp-card--wide">
+              <div class="exp-card__head">
+                <span class="exp-card__logo exp-card__logo--light">
+                  <img src="./assets/images/iit_delhi.png" alt="IIT Delhi logo" loading="lazy" />
+                </span>
+                <div class="exp-card__heading">
+                  <h3 class="exp-card__title">Teaching Assistant</h3>
+                  <p class="exp-card__company">IIT Delhi • On-campus</p>
+                </div>
+                <span class="exp-card__when-pill">2025 – Present</span>
               </div>
 
-              <div class="exp-card__group">
-                <h4 class="exp-card__role">COL106 — Data Structures &amp; Algorithms (TA)</h4>
-                <p class="exp-card__when">Jul 2025 – Jan 2026</p>
-                <ul class="exp-card__list">
-                  <li>Conducted labs, evaluated assignments, and supported debugging + conceptual clarity in C++.</li>
-                </ul>
-              </div>
+              <div class="exp-card__groups">
+                <div class="exp-card__group">
+                  <h4 class="exp-card__role">COL7160 — Quantum Computing (TA)</h4>
+                  <p class="exp-card__when">Jan 2026 – Present</p>
+                </div>
 
-              <div class="exp-card__group">
-                <h4 class="exp-card__role">COL100 — Introduction to Computer Science (TA)</h4>
-                <p class="exp-card__when">Jan 2025 – Jun 2025</p>
-                <ul class="exp-card__list">
-                  <li>Helped students with Python fundamentals, recursion, ADTs, and algorithmic thinking.</li>
-                  <li><strong>Award:</strong> Outstanding Teaching Assistant (2024–25)</li>
-                </ul>
+                <div class="exp-card__group">
+                  <h4 class="exp-card__role">COL106 — Data Structures &amp; Algorithms (TA)</h4>
+                  <p class="exp-card__when">Jul 2025 – Jan 2026</p>
+                  <ul class="exp-card__list">
+                    <li>Conducted labs, evaluated assignments, and supported debugging + conceptual clarity in C++.</li>
+                  </ul>
+                </div>
+
+                <div class="exp-card__group">
+                  <h4 class="exp-card__role">COL100 — Introduction to Computer Science (TA)</h4>
+                  <p class="exp-card__when">Jan 2025 – Jun 2025</p>
+                  <ul class="exp-card__list">
+                    <li>Helped students with Python fundamentals, recursion, ADTs, and algorithmic thinking.</li>
+                    <li><strong>Award:</strong> Outstanding Teaching Assistant (2024–25)</li>
+                  </ul>
+                </div>
               </div>
 
               <div class="tags">

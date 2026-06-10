@@ -12,7 +12,20 @@ window.SITE_CONFIG = {
   shortName: "Arindam",
   role: "Cyber Security • Systems • Backend",
   location: "Delhi, India",
-  email: "arindam.sal.edu@gmail.com",
+  email: "arindam[dot]sal[dot]edu[at]gmail.com",
+
+  /* =========================
+     Current Role
+     Single source of truth for the
+     hero badge + experience highlight
+     ========================= */
+  currentJob: {
+    company: "SKETS Griphic Private Limited",
+    companyShort: "SKETS Griphic",
+    role: "Software Engineer",
+    period: "Jun 2026 – Present",
+    logo: "./assets/images/griphic_logo.jpg"
+  },
 
   /* =========================
      Hero Section Content

@@ -137,6 +137,15 @@
     grid-template-columns: 1fr;
   }
 
+  /* ===== Experience (current role) ===== */
+  .exp-card__head {
+    flex-wrap: wrap;
+  }
+
+  .exp-card__badge {
+    order: 3;
+  }
+
   /* ===== Contact ===== */
   .contact-card {
     padding: var(--sp-5);
