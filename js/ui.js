@@ -105,13 +105,13 @@
             <div class="project-overlay">
                 ${p.links.github ? `
                 <a href="${p.links.github}" target="_blank" rel="noopener" aria-label="GitHub Repository">
-                    <img src="./assets/icons/github.svg" alt="GitHub" />
+                    <img src="./assets/icons/github.svg" alt="" />
                 </a>
                 ` : ""}
 
                 ${p.links.report ? `
                 <a href="${p.links.report}" target="_blank" rel="noopener" aria-label="Project Report">
-                    <img src="./assets/icons/pdf.svg" alt="PDF Report" />
+                    <img src="./assets/icons/pdf.svg" alt="" />
                 </a>
                 ` : ""}
             </div>
