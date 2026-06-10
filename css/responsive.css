@@ -56,6 +56,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    margin-left: auto; /* push hamburger + theme toggle to the right */
   }
 
   .nav__menu {
@@ -77,6 +78,10 @@
     margin-left: 0;
   }
 
+  :root[data-theme="light"] .nav__menu {
+    background: rgba(255, 255, 255, 0.96);
+  }
+
   .nav__menu.is-open {
     display: flex;
   }
@@ -87,8 +92,14 @@
     border-radius: var(--radius-md);
   }
 
-  /* Hide navbar CTA on mobile */
+  /* Keep the theme toggle visible on mobile; hide only the CV button */
   .nav__cta {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+  }
+
+  .nav__cta #navDownloadCV {
     display: none;
   }
 

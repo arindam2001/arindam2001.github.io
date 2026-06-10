@@ -15,6 +15,8 @@ and deployed on **GitHub Pages**.
 - **Bento layouts** — asymmetric About grid and a featured-card rhythm for Projects.
 - **Micro-interactions** — animated hero (shimmer, ambient glow, pointer parallax), cursor
   spotlight on project cards, gradient-border CTAs — all respecting `prefers-reduced-motion`.
+- **Dark / light mode** — toggle in the navbar (sun/moon); remembers your choice and follows
+  the OS preference until you pick one. Flash-free on load.
 - **Config-driven content** — identity, projects, and documents live in plain JS data files
   (single source of truth).
 - **Two power-user features** — a **Terminal Mode** and a **Command Palette** (details below).

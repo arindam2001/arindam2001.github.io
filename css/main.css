@@ -2125,3 +2125,92 @@ a.contact-item:hover {
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
   box-shadow: 0 0 8px rgba(34, 211, 238, 0.4);
 }
+
+/* =========================================================
+   THEME TOGGLE + LIGHT THEME
+   ========================================================= */
+
+/* Toggle button */
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: rgba(148, 163, 184, 0.06);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out),
+              background var(--duration-fast) ease,
+              border-color var(--duration-fast) ease,
+              color var(--duration-fast) ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px);
+  background: rgba(34, 211, 238, 0.08);
+  border-color: rgba(34, 211, 238, 0.25);
+  color: var(--accent);
+}
+
+.theme-toggle__icon { display: block; }
+.theme-toggle__sun { display: none; }
+
+:root[data-theme="light"] .theme-toggle__moon { display: none; }
+:root[data-theme="light"] .theme-toggle__sun { display: block; }
+
+/* ---- Light theme tokens ---- */
+:root[data-theme="light"] {
+  --bg:          #f6f8fc;
+  --bg-subtle:   #eef2f9;
+  --surface:     rgba(255, 255, 255, 0.72);
+  --surface-2:   rgba(255, 255, 255, 0.50);
+  --surface-solid: #ffffff;
+
+  --text:        #0f172a;
+  --text-2:      #1e293b;
+  --muted:       #475569;   /* AA on light */
+  --muted-2:     #64748b;
+
+  --border:       rgba(15, 23, 42, 0.10);
+  --border-hover: rgba(15, 23, 42, 0.18);
+
+  --accent:      #0891b2;   /* cyan-600 — readable on light */
+  --accent-dim:  #06b6d4;
+  --accent-2:    #7c3aed;   /* violet-600 */
+  --accent-2-dim:#8b5cf6;
+  --accent-3:    #d97706;   /* amber-600 */
+
+  --glow-accent:   rgba(8, 145, 178, 0.12);
+  --glow-accent-2: rgba(124, 58, 237, 0.10);
+
+  --shadow-sm:  0  4px 12px rgba(15, 23, 42, 0.06);
+  --shadow:     0  8px 32px rgba(15, 23, 42, 0.10);
+  --shadow-lg:  0 16px 48px rgba(15, 23, 42, 0.14);
+  --shadow-glow: 0 0 40px rgba(8, 145, 178, 0.06);
+}
+
+/* ---- Light theme: override a few hardcoded dark surfaces ---- */
+:root[data-theme="light"] .header {
+  background: rgba(246, 248, 252, 0.8);
+}
+
+:root[data-theme="light"] .section--alt {
+  background: rgba(226, 232, 240, 0.5);
+}
+
+:root[data-theme="light"] .footer {
+  background: rgba(226, 232, 240, 0.85);
+}
+
+/* Hero name gradient (base starts at #fff — invalid on light) */
+:root[data-theme="light"] .hero__title {
+  background-image: linear-gradient(135deg, var(--text) 0%, var(--accent) 55%, var(--accent-2) 100%);
+}
+
+/* Soften the ambient colour blobs on a light background */
+:root[data-theme="light"] .bg-blob__circle {
+  opacity: 0.16;
+}
