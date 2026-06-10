@@ -1,0 +1,316 @@
+/* css/terminal.css */
+/* =========================================================
+   Terminal Mode — additive power-user overlay (Easter egg)
+   Reuses the existing design tokens from main.css; introduces
+   no new colors beyond conventional terminal red/amber/green.
+   ========================================================= */
+
+.term {
+  --term-mono: ui-monospace, "Cascadia Code", "Fira Code", "JetBrains Mono", Consolas, monospace;
+  --term-red: #ff5f57;
+  --term-amber: #febc2e;
+  --term-green: #28c840;
+
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  padding: var(--sp-5, 20px);
+  background: rgba(6, 8, 15, 0.62);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  /* Entrance via animation (with fill: both) so the final visible
+     state is guaranteed without relying on JS frame timing. */
+  animation: termOverlayIn var(--duration-base, 250ms) var(--ease-out, ease) both;
+}
+
+/* hidden attribute must win over display:grid */
+.term[hidden] {
+  display: none;
+}
+
+.term--closing {
+  animation: termOverlayOut var(--duration-base, 250ms) var(--ease-out, ease) both;
+}
+
+/* ===== Window ===== */
+.term__window {
+  position: relative;
+  width: min(760px, 94vw);
+  max-height: min(78vh, 660px);
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-solid, #111827);
+  border: 1px solid var(--border, rgba(148, 163, 184, 0.18));
+  border-radius: var(--radius-lg, 16px);
+  box-shadow: var(--shadow-lg, 0 16px 48px rgba(0, 0, 0, 0.45)),
+              0 0 70px rgba(34, 211, 238, 0.08);
+  overflow: hidden;
+  font-family: var(--term-mono);
+  animation: termWindowIn var(--duration-base, 250ms) var(--ease-out, ease) both;
+}
+
+.term--closing .term__window {
+  animation: termWindowOut var(--duration-base, 250ms) var(--ease-out, ease) both;
+}
+
+@keyframes termOverlayIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes termOverlayOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes termWindowIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.985); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes termWindowOut {
+  from { opacity: 1; transform: none; }
+  to   { opacity: 0; transform: translateY(12px) scale(0.985); }
+}
+
+/* ===== Title bar ===== */
+.term__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3, 12px);
+  padding: var(--sp-3, 12px) var(--sp-4, 16px);
+  background: rgba(148, 163, 184, 0.05);
+  border-bottom: 1px solid var(--border, rgba(148, 163, 184, 0.18));
+}
+
+.term__dots {
+  display: inline-flex;
+  gap: 7px;
+}
+
+.term__dots i {
+  width: 11px;
+  height: 11px;
+  display: block;
+  border-radius: 50%;
+  background: var(--muted-2, #8595ab);
+}
+
+.term__dots i:nth-child(1) { background: var(--term-red); }
+.term__dots i:nth-child(2) { background: var(--term-amber); }
+.term__dots i:nth-child(3) { background: var(--term-green); }
+
+.term__titlebar {
+  flex: 1;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--muted, #a3b1c6);
+  letter-spacing: 0.02em;
+}
+
+.term__close {
+  background: transparent;
+  border: none;
+  color: var(--muted, #a3b1c6);
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1;
+  padding: 4px 6px;
+  border-radius: 6px;
+  font-family: var(--term-mono);
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.term__close:hover {
+  color: var(--text, #f1f5f9);
+  background: rgba(148, 163, 184, 0.12);
+}
+
+/* ===== Body ===== */
+.term__body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: var(--sp-4, 16px);
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: var(--text-2, #e2e8f0);
+}
+
+.term__history {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: var(--sp-2, 8px);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.3) transparent;
+}
+
+.term__history::-webkit-scrollbar { width: 8px; }
+.term__history::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.22);
+  border-radius: 8px;
+}
+
+.term__line {
+  margin: 0 0 2px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.term__line--cmd    { color: var(--text, #f1f5f9); }
+.term__line--muted  { color: var(--muted, #a3b1c6); }
+.term__line--accent { color: var(--accent, #22d3ee); }
+.term__line--err    { color: var(--term-red); }
+.term__line--ok     { color: var(--term-green); }
+
+.term__h {
+  color: var(--accent, #22d3ee);
+  font-weight: 700;
+}
+
+.term__key {
+  color: var(--accent-2, #a78bfa);
+}
+
+.term__prompt-user { color: var(--accent, #22d3ee); }
+
+.term a {
+  color: var(--accent, #22d3ee);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.term a:hover { color: var(--accent-2, #a78bfa); }
+
+/* ===== Input line ===== */
+.term__inputline {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2, 8px);
+  margin-top: var(--sp-2, 8px);
+  padding-top: var(--sp-3, 12px);
+  border-top: 1px solid var(--border, rgba(148, 163, 184, 0.18));
+}
+
+.term__prompt {
+  color: var(--accent, #22d3ee);
+  white-space: nowrap;
+  font-family: var(--term-mono);
+  font-size: 0.86rem;
+}
+
+.term__input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text, #f1f5f9);
+  font-family: var(--term-mono);
+  font-size: 0.86rem;
+  caret-color: var(--accent, #22d3ee);
+}
+
+/* =========================================================
+   Easter egg — Secure Boot "mission control" popup
+   ========================================================= */
+.term__mission {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 38%, rgba(12, 18, 38, 0.72), rgba(6, 8, 15, 0.95));
+  animation: termFade 240ms var(--ease-out, ease);
+}
+
+.term__stars { position: absolute; inset: 0; pointer-events: none; }
+
+.term__star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #fff;
+  animation: termTwinkle 2.4s ease-in-out infinite;
+}
+
+.term__mission-card {
+  position: relative;
+  z-index: 2;
+  width: min(440px, 86%);
+  background: rgba(11, 17, 32, 0.82);
+  border: 1px solid rgba(34, 211, 238, 0.3);
+  border-radius: var(--radius-lg, 16px);
+  padding: var(--sp-5, 20px);
+  box-shadow: 0 0 55px rgba(34, 211, 238, 0.18);
+  font-family: var(--term-mono);
+}
+
+.term__mission-title {
+  margin: 0 0 var(--sp-3, 12px);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--accent, #22d3ee);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.term__mission-log {
+  margin: 0;
+  display: grid;
+  gap: 4px;
+  font-size: 0.82rem;
+  color: var(--text-2, #e2e8f0);
+}
+
+.term__mission-log div { white-space: pre-wrap; }
+
+.term__mission-status {
+  margin: var(--sp-4, 16px) 0 0;
+  color: var(--term-green);
+  font-weight: 700;
+  font-size: 0.84rem;
+}
+
+.term__mission-hint {
+  margin: var(--sp-3, 12px) 0 0;
+  color: var(--muted, #a3b1c6);
+  font-size: 0.72rem;
+}
+
+.term__rocket {
+  display: inline-block;
+  font-size: 1.05rem;
+  animation: termFloat 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes termFade  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes termFloat { to { transform: translateY(-6px); } }
+@keyframes termTwinkle { 0%, 100% { opacity: 0.8; } 50% { opacity: 0.2; } }
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  .term,
+  .term--closing,
+  .term__window,
+  .term--closing .term__window,
+  .term__mission,
+  .term__rocket,
+  .term__star { animation: none; }
+}
+
+/* ===== Mobile: full-screen sheet ===== */
+@media (max-width: 600px) {
+  .term {
+    padding: 0;
+    place-items: stretch;
+  }
+  .term__window {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    border: none;
+    border-radius: 0;
+  }
+  .term__body { font-size: 0.82rem; }
+}
