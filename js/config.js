@@ -12,7 +12,8 @@ window.SITE_CONFIG = {
   shortName: "Arindam",
   role: "Cyber Security • Systems • Backend",
   location: "Delhi, India",
-  email: "arindam[dot]sal[dot]edu[at]gmail.com",
+  email: "arindam.sal.edu@gmail.com",                       // functional address (mailto, forms)
+  emailDisplay: "arindam [dot] sal [dot] edu [at] gmail.com", // shown to humans (anti-scraping)
 
   /* =========================
      Current Role

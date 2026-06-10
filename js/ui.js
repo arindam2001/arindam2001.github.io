@@ -65,7 +65,8 @@
     $("contactFacebook") && ($("contactFacebook").href = c.social.facebook);
 
     $("contactEmail") && ($("contactEmail").href = `mailto:${c.email}`);
-    $("contactEmailText") && ($("contactEmailText").textContent = c.email);
+    $("contactEmailText") &&
+      ($("contactEmailText").textContent = c.emailDisplay || c.email);
 
     $("navDownloadCV") && ($("navDownloadCV").href = c.documents.defaultCV);
     $("heroDownloadBtn") &&
