@@ -17,8 +17,8 @@
 
   --text:        #f1f5f9;
   --text-2:      #e2e8f0;
-  --muted:       #94a3b8;
-  --muted-2:     #64748b;
+  --muted:       #a3b1c6;       /* lightened for WCAG AA on dark */
+  --muted-2:     #8595ab;       /* lightened: ~4.6:1 on --bg (AA) */
 
   --border:      rgba(148, 163, 184, 0.10);
   --border-hover: rgba(148, 163, 184, 0.20);
@@ -27,6 +27,7 @@
   --accent-dim:  #06b6d4;       /* cyan-500 */
   --accent-2:    #a78bfa;       /* violet-400 */
   --accent-2-dim:#8b5cf6;       /* violet-500 */
+  --accent-3:    #fbbf24;       /* amber-400 — warm "live/now" micro-accent */
 
   --glow-accent:   rgba(34, 211, 238, 0.15);
   --glow-accent-2: rgba(167, 139, 250, 0.12);
@@ -38,16 +39,18 @@
 
   /* --- Typography --- */
   --font: "Plus Jakarta Sans", "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Space Grotesk", "Plus Jakarta Sans", system-ui, sans-serif;
 
   --fs-xs:   0.75rem;    /* 12px */
   --fs-sm:   0.875rem;   /* 14px */
   --fs-base: 1rem;       /* 16px */
   --fs-md:   1.125rem;   /* 18px */
   --fs-lg:   1.25rem;    /* 20px */
-  --fs-xl:   1.5rem;     /* 24px */
-  --fs-2xl:  2rem;       /* 32px */
-  --fs-3xl:  2.5rem;     /* 40px */
-  --fs-4xl:  3.25rem;    /* 52px */
+  /* Fluid display steps — scale smoothly between mobile and desktop */
+  --fs-xl:   clamp(1.35rem, 1.18rem + 0.7vw, 1.5rem);   /* ~22 → 24 */
+  --fs-2xl:  clamp(1.65rem, 1.35rem + 1.3vw, 2rem);     /* ~26 → 32 */
+  --fs-3xl:  clamp(2rem,   1.55rem + 2.0vw, 2.5rem);    /* ~32 → 40 */
+  --fs-4xl:  clamp(2.4rem, 1.7rem + 3.1vw, 3.25rem);    /* ~38 → 52 */
 
   /* --- Spacing (8px scale) --- */
   --sp-1:  4px;
@@ -112,6 +115,16 @@ body {
 img {
   max-width: 100%;
   display: block;
+}
+
+/* Display typeface for headings & brand marks */
+h1, h2, h3, h4, h5, h6,
+.brand__text,
+.footer__brand,
+.hero__title,
+.section__title {
+  font-family: var(--font-display);
+  font-feature-settings: "ss01" 1;
 }
 
 a {
@@ -322,7 +335,7 @@ body {
 }
 
 .section__title {
-  font-size: clamp(var(--fs-2xl), 3vw, var(--fs-3xl));
+  font-size: var(--fs-3xl);
   font-weight: 800;
   line-height: 1.15;
   margin: 0 0 var(--sp-3);
@@ -672,7 +685,7 @@ body {
 
 .hero__title {
   margin: 0 0 var(--sp-4);
-  font-size: clamp(var(--fs-3xl), 5vw, var(--fs-4xl));
+  font-size: var(--fs-4xl);
   line-height: 1.05;
   letter-spacing: -0.04em;
   font-weight: 800;
