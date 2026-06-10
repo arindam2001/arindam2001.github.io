@@ -1,0 +1,275 @@
+/* css/palette.css */
+/* =========================================================
+   Command Palette — fuzzy quick-nav / action launcher (⌘K)
+   Additive overlay; reuses the existing design tokens.
+   ========================================================= */
+
+/* ===== Floating launcher (also the touch entry point) ===== */
+.cmdk-fab {
+  position: fixed;
+  right: max(var(--sp-5, 20px), env(safe-area-inset-right));
+  bottom: max(var(--sp-5, 20px), env(safe-area-inset-bottom));
+  z-index: 1400;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2, 8px);
+  padding: 10px 14px;
+  border-radius: var(--radius-full, 999px);
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  background: rgba(17, 24, 45, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--muted, #a3b1c6);
+  font-family: var(--font, system-ui), sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm, 0 4px 12px rgba(0, 0, 0, 0.25));
+  transition: transform 150ms ease, border-color 150ms ease,
+              color 150ms ease, box-shadow 250ms ease;
+}
+
+.cmdk-fab:hover {
+  transform: translateY(-2px);
+  color: var(--text, #f1f5f9);
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow: 0 8px 28px rgba(34, 211, 238, 0.18);
+}
+
+.cmdk-fab__icon { font-size: 0.95rem; line-height: 1; }
+.cmdk-fab__keys {
+  display: inline-flex;
+  gap: 3px;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: rgba(148, 163, 184, 0.12);
+  color: var(--text-2, #e2e8f0);
+  font-family: ui-monospace, "Fira Code", Consolas, monospace;
+  font-size: 0.72rem;
+}
+
+/* ===== Overlay ===== */
+.cmdk {
+  position: fixed;
+  inset: 0;
+  z-index: 2100;
+  display: grid;
+  align-items: start;
+  justify-items: center;
+  padding: clamp(var(--sp-8, 32px), 12vh, 160px) var(--sp-4, 16px) var(--sp-4, 16px);
+  background: rgba(6, 8, 15, 0.62);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: cmdkOverlayIn var(--duration-base, 250ms) var(--ease-out, ease) both;
+}
+
+.cmdk[hidden] { display: none; }
+
+.cmdk--closing {
+  animation: cmdkOverlayOut var(--duration-base, 250ms) var(--ease-out, ease) both;
+}
+
+/* ===== Panel ===== */
+.cmdk__panel {
+  width: min(560px, 96vw);
+  max-height: min(70vh, 560px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--surface-solid, #111827);
+  border: 1px solid var(--border, rgba(148, 163, 184, 0.18));
+  border-radius: var(--radius-lg, 16px);
+  box-shadow: var(--shadow-lg, 0 16px 48px rgba(0, 0, 0, 0.45)),
+              0 0 70px rgba(34, 211, 238, 0.08);
+  animation: cmdkPanelIn var(--duration-base, 250ms) var(--ease-out, ease) both;
+}
+
+.cmdk--closing .cmdk__panel {
+  animation: cmdkPanelOut var(--duration-base, 250ms) var(--ease-out, ease) both;
+}
+
+/* ===== Search row ===== */
+.cmdk__search {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3, 12px);
+  padding: var(--sp-4, 16px);
+  border-bottom: 1px solid var(--border, rgba(148, 163, 184, 0.18));
+}
+
+.cmdk__search-icon { color: var(--muted, #a3b1c6); font-size: 0.95rem; }
+
+.cmdk__input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text, #f1f5f9);
+  font-family: var(--font, system-ui), sans-serif;
+  font-size: 1rem;
+  caret-color: var(--accent, #22d3ee);
+}
+
+.cmdk__input::placeholder { color: var(--muted-2, #8595ab); }
+
+.cmdk__esc {
+  flex-shrink: 0;
+  padding: 2px 7px;
+  border-radius: 6px;
+  border: 1px solid var(--border, rgba(148, 163, 184, 0.18));
+  background: rgba(148, 163, 184, 0.08);
+  color: var(--muted, #a3b1c6);
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.7rem;
+}
+
+/* ===== Results ===== */
+.cmdk__list {
+  list-style: none;
+  margin: 0;
+  padding: var(--sp-2, 8px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.3) transparent;
+}
+
+.cmdk__list::-webkit-scrollbar { width: 8px; }
+.cmdk__list::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.22);
+  border-radius: 8px;
+}
+
+.cmdk__item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3, 12px);
+  padding: 10px 12px;
+  border-radius: var(--radius-md, 12px);
+  cursor: pointer;
+  color: var(--text-2, #e2e8f0);
+}
+
+.cmdk__item.is-selected {
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.12), rgba(167, 139, 250, 0.10));
+  box-shadow: inset 0 0 0 1px rgba(34, 211, 238, 0.22);
+}
+
+.cmdk__icon {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-sm, 8px);
+  background: rgba(148, 163, 184, 0.08);
+  color: var(--accent, #22d3ee);
+  font-size: 0.85rem;
+}
+
+.cmdk__text { flex: 1; min-width: 0; }
+
+.cmdk__title {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cmdk__title mark {
+  background: transparent;
+  color: var(--accent, #22d3ee);
+  font-weight: 700;
+}
+
+.cmdk__sub {
+  display: block;
+  font-size: 0.76rem;
+  color: var(--muted, #a3b1c6);
+}
+
+.cmdk__cat {
+  flex-shrink: 0;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted-2, #8595ab);
+}
+
+.cmdk__empty {
+  list-style: none;
+  padding: var(--sp-6, 24px);
+  text-align: center;
+  color: var(--muted, #a3b1c6);
+  font-size: 0.88rem;
+}
+
+/* ===== Footer hints ===== */
+.cmdk__footer {
+  display: flex;
+  gap: var(--sp-4, 16px);
+  padding: 10px var(--sp-4, 16px);
+  border-top: 1px solid var(--border, rgba(148, 163, 184, 0.18));
+  color: var(--muted-2, #8595ab);
+  font-size: 0.72rem;
+}
+
+.cmdk__footer kbd {
+  font-family: ui-monospace, Consolas, monospace;
+  color: var(--muted, #a3b1c6);
+  background: rgba(148, 163, 184, 0.1);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
+/* ===== Toast (copy feedback) ===== */
+.cmdk-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 32px;
+  transform: translateX(-50%);
+  z-index: 2200;
+  padding: 10px 18px;
+  border-radius: var(--radius-full, 999px);
+  background: rgba(17, 24, 45, 0.92);
+  border: 1px solid rgba(34, 211, 238, 0.3);
+  color: var(--text, #f1f5f9);
+  font-family: var(--font, system-ui), sans-serif;
+  font-size: 0.84rem;
+  box-shadow: var(--shadow, 0 8px 32px rgba(0, 0, 0, 0.35));
+  animation: cmdkToast 1.9s var(--ease-out, ease) both;
+}
+
+@keyframes cmdkOverlayIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes cmdkOverlayOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes cmdkPanelIn {
+  from { opacity: 0; transform: translateY(-10px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes cmdkPanelOut {
+  from { opacity: 1; transform: none; }
+  to   { opacity: 0; transform: translateY(-10px) scale(0.98); }
+}
+@keyframes cmdkToast {
+  0%   { opacity: 0; transform: translateX(-50%) translateY(8px); }
+  12%, 80% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(8px); }
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  .cmdk,
+  .cmdk--closing,
+  .cmdk__panel,
+  .cmdk--closing .cmdk__panel,
+  .cmdk-toast { animation: none; }
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 600px) {
+  .cmdk { padding-top: 8vh; }
+  .cmdk-fab__keys { display: none; }
+  .cmdk-fab { padding: 12px; }
+}
