@@ -417,6 +417,35 @@
     line(`Experience:      ${getExperience().length} roles`, "term__line--muted");
   }
 
+  function fxToggle(label, fn) {
+    if (window.FX && typeof fn === "function") {
+      const on = fn();
+      line(label + ": " + (on ? "ON" : "OFF"), on ? "term__line--ok" : "term__line--muted");
+    } else {
+      line("effect unavailable.", "term__line--err");
+    }
+  }
+  function cmdMatrix() {
+    fxToggle("matrix rain", window.FX && window.FX.toggleMatrix);
+  }
+  function cmdMonitor() {
+    fxToggle("system monitor", window.FX && window.FX.toggleMonitor);
+  }
+  function cmdAscii() {
+    fxToggle("ascii portrait", window.FX && window.FX.toggleAscii);
+  }
+  function cmdFingerprint() {
+    const f = window.FX && window.FX.getFingerprint ? window.FX.getFingerprint() : null;
+    if (!f) return line("fingerprint unavailable.", "term__line--err");
+    line("visitor fingerprint — computed locally, nothing sent:", "term__line--accent");
+    Object.keys(f).forEach((k) =>
+      htmlLine(
+        `  <span class="term__key">${esc(pad(k, 12))}</span>` +
+          `<span class="term__line--muted">${esc(f[k])}</span>`
+      )
+    );
+  }
+
   function cmdSecureBoot(args, rest, name) {
     line("launching secure-boot sequence…", "term__line--accent");
     runMission(name);
@@ -552,6 +581,10 @@
     { name: "cat", usage: "cat about.md", desc: "Print the about section", run: cmdCat },
     { name: "tree", desc: "Directory view of the portfolio", run: cmdTree },
     { name: "status", desc: "Portfolio status & counts", run: cmdStatus },
+    { name: "matrix", desc: "Toggle Matrix rain in the hero", run: cmdMatrix },
+    { name: "monitor", desc: "Toggle the system-monitor HUD", run: cmdMonitor, alias: ["hud"] },
+    { name: "ascii", desc: "Toggle ASCII-art portrait", run: cmdAscii },
+    { name: "fingerprint", desc: "Your local-only visitor fingerprint", run: cmdFingerprint, alias: ["sysinfo"] },
     {
       name: "secure-boot",
       desc: "🚀 Easter egg: run the secure-boot sequence",

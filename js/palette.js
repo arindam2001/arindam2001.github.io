@@ -139,6 +139,20 @@
       run: openTerminal,
     });
 
+    // Visual effects (only if the effects layer is loaded)
+    if (window.FX) {
+      const fxRun = (fn) => () => {
+        closePalette();
+        try {
+          fn();
+        } catch (e) {}
+      };
+      actions.push({ icon: "▦", cat: "Effect", title: "Toggle Matrix rain", run: fxRun(FX.toggleMatrix) });
+      actions.push({ icon: "▤", cat: "Effect", title: "Toggle System Monitor", run: fxRun(FX.toggleMonitor) });
+      actions.push({ icon: "☺", cat: "Effect", title: "Toggle ASCII portrait", run: fxRun(FX.toggleAscii) });
+      actions.push({ icon: "⌖", cat: "Effect", title: "Show visitor fingerprint", run: fxRun(FX.showFingerprint) });
+    }
+
     return actions;
   }
 

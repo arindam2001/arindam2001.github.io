@@ -1,0 +1,204 @@
+/* css/effects.css */
+/* =========================================================
+   Visual effects layer (all additive, opt-in, theme-aware)
+     1. Decrypt-on-reveal text
+     2. Matrix rain (hero)
+     3. System Monitor HUD
+     4. Visitor fingerprint card
+     5. ASCII portrait toggle
+   ========================================================= */
+
+/* ---------- 1. Decrypt ---------- */
+.fx-decrypting {
+  color: var(--accent);
+  text-shadow: 0 0 12px rgba(34, 211, 238, 0.25);
+}
+
+/* ---------- 2. Matrix rain ---------- */
+.fx-matrix {
+  position: absolute;
+  inset: 0;
+  z-index: -1;            /* behind hero content, above hero bg */
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+/* ---------- 3. System Monitor HUD ---------- */
+.fx-hud {
+  position: fixed;
+  left: max(var(--sp-5, 20px), env(safe-area-inset-left));
+  bottom: max(var(--sp-5, 20px), env(safe-area-inset-bottom));
+  z-index: 1400;
+  width: 248px;
+  font-family: ui-monospace, "Fira Code", Consolas, monospace;
+  font-size: 0.72rem;
+  color: var(--text-2, #e2e8f0);
+  background: var(--surface-solid, #111827);
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  border-radius: var(--radius-md, 12px);
+  box-shadow: var(--shadow, 0 8px 32px rgba(0, 0, 0, 0.35)),
+              0 0 30px rgba(34, 211, 238, 0.06);
+  overflow: hidden;
+  animation: fxHudIn 220ms var(--ease-out, ease) both;
+}
+
+.fx-hud[hidden] { display: none; }
+
+.fx-hud__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2, 8px);
+  padding: 7px 10px;
+  background: rgba(148, 163, 184, 0.06);
+  border-bottom: 1px solid var(--border, rgba(148, 163, 184, 0.18));
+  color: var(--accent, #22d3ee);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.66rem;
+}
+
+.fx-hud__pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent, #22d3ee);
+  box-shadow: 0 0 8px var(--accent, #22d3ee);
+  animation: fxPulse 1.6s ease-in-out infinite;
+}
+
+.fx-hud__title { flex: 1; }
+
+.fx-hud__close {
+  background: transparent;
+  border: none;
+  color: var(--muted, #a3b1c6);
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1;
+  padding: 0 2px;
+}
+.fx-hud__close:hover { color: var(--text, #f1f5f9); }
+
+.fx-hud__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border, rgba(148, 163, 184, 0.12));
+}
+
+.fx-hud__cell {
+  background: var(--surface-solid, #111827);
+  padding: 8px 10px;
+}
+
+.fx-hud__k { color: var(--muted, #a3b1c6); font-size: 0.62rem; letter-spacing: 0.05em; }
+.fx-hud__v { color: var(--accent, #22d3ee); font-weight: 700; font-size: 0.86rem; }
+
+.fx-hud__log {
+  height: 88px;
+  overflow: hidden;
+  padding: 8px 10px;
+  border-top: 1px solid var(--border, rgba(148, 163, 184, 0.18));
+  color: var(--muted, #a3b1c6);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 2px;
+}
+.fx-hud__log div { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fx-hud__log b { color: var(--accent-3, #fbbf24); font-weight: 600; }
+
+/* ---------- 4. Visitor fingerprint ---------- */
+.fx-fp {
+  position: fixed;
+  inset: 0;
+  z-index: 2100;
+  display: grid;
+  place-items: center;
+  padding: var(--sp-5, 20px);
+  background: rgba(6, 8, 15, 0.62);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: fxFade 220ms var(--ease-out, ease) both;
+}
+.fx-fp[hidden] { display: none; }
+
+.fx-fp__card {
+  width: min(440px, 94vw);
+  max-height: 80vh;
+  overflow: auto;
+  background: var(--surface-solid, #111827);
+  border: 1px solid rgba(34, 211, 238, 0.28);
+  border-radius: var(--radius-lg, 16px);
+  box-shadow: var(--shadow-lg, 0 16px 48px rgba(0, 0, 0, 0.45));
+  font-family: ui-monospace, "Fira Code", Consolas, monospace;
+  animation: fxCardIn 240ms var(--ease-out, ease) both;
+}
+
+.fx-fp__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2, 8px);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border, rgba(148, 163, 184, 0.18));
+  color: var(--accent, #22d3ee);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.74rem;
+}
+.fx-fp__bar .fx-hud__title { flex: 1; }
+
+.fx-fp__rows { padding: 8px 16px 14px; }
+.fx-fp__row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--sp-4, 16px);
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.07);
+  font-size: 0.82rem;
+}
+.fx-fp__row:last-child { border-bottom: none; }
+.fx-fp__k { color: var(--muted, #a3b1c6); }
+.fx-fp__v { color: var(--text, #f1f5f9); font-weight: 600; text-align: right; word-break: break-word; }
+.fx-fp__note {
+  padding: 10px 16px 16px;
+  color: var(--muted-2, #8595ab);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+/* ---------- 5. ASCII portrait ---------- */
+.profile-card__frame { position: relative; }
+
+.fx-ascii {
+  position: absolute;
+  inset: var(--sp-4, 16px);
+  margin: 0;
+  display: none;
+  overflow: hidden;
+  border-radius: var(--radius-lg, 16px);
+  background: var(--bg, #06080f);
+  color: var(--accent, #22d3ee);
+  font-family: ui-monospace, "Fira Code", Consolas, monospace;
+  font-weight: 700;
+  letter-spacing: 0;
+  white-space: pre;
+  user-select: none;
+}
+.fx-ascii.is-on { display: block; }
+
+/* ---------- shared keyframes ---------- */
+@keyframes fxHudIn  { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes fxFade   { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fxCardIn { from { opacity: 0; transform: translateY(-10px) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes fxPulse  { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-hud, .fx-fp, .fx-fp__card, .fx-hud__pulse { animation: none; }
+}
+
+@media (max-width: 600px) {
+  .fx-hud { width: 210px; font-size: 0.66rem; }
+}
