@@ -30,11 +30,12 @@ and deployed on **GitHub Pages**.
 .
 ├── index.html              # Page markup
 ├── css/
-│   ├── main.css            # Design system + components
+│   ├── main.css            # Design system + components + light theme
 │   ├── layout.css          # Grid / layout
 │   ├── responsive.css      # Breakpoints
 │   ├── terminal.css        # Terminal Mode styles
-│   └── palette.css         # Command Palette styles
+│   ├── palette.css         # Command Palette styles
+│   └── effects.css         # Visual-effects styles
 ├── js/
 │   ├── config.js           # Identity, hero, social, current job, contact  (EDIT ME)
 │   ├── projects.js         # Project data array                            (EDIT ME)
@@ -42,7 +43,9 @@ and deployed on **GitHub Pages**.
 │   ├── ui.js               # Renders projects/docs, binds config → DOM
 │   ├── main.js             # Init, scroll-reveal, scroll-spy, nav, parallax
 │   ├── terminal.js         # Terminal Mode
-│   └── palette.js          # Command Palette
+│   ├── palette.js          # Command Palette
+│   ├── effects.js          # Visual effects (window.FX)
+│   └── theme.js            # Dark / light theme toggle
 ├── assets/                 # images, icons, logos
 └── docs/                   # PDFs (CVs, thesis, reports)
 ```
@@ -120,6 +123,24 @@ or tap the floating **⌘K** button (bottom-right — also the touch entry point
 **Available actions** (auto-generated): jump to any section · open a project's repo/report ·
 download any CV · open the thesis · open GitHub / LinkedIn · email me · **copy email address** ·
 **Open Terminal Mode**.
+
+---
+
+## 🧪 Feature 3 — Visual effects
+
+A set of opt-in, theme-aware effects (all respect `prefers-reduced-motion`). Toggle them from the
+**Command Palette** (⌘K → "Effect …") or **Terminal Mode**:
+
+| Effect | How to use | What it does |
+|---|---|---|
+| **Decrypt text** | automatic | Section titles & skills scramble like a cipher, then resolve, as they scroll into view |
+| **Matrix rain** | `matrix` (terminal) or palette | Toggles falling-glyph code rain behind the hero |
+| **System Monitor** | `monitor` / `hud` or palette | A live HUD: uptime, FPS, scroll %, viewport, and a faux packet log |
+| **Visitor fingerprint** | `fingerprint` / `sysinfo` or palette | A card of what any site can see (browser, OS, timezone, screen, cores…) — **computed locally, nothing sent** |
+| **ASCII portrait** | `ascii` (terminal) or palette | Swaps the profile photo for live-generated ASCII art |
+
+> The ASCII portrait reads image pixels via `<canvas>`, so the page must be served over
+> **http/https** (the GitHub Pages site, or `python3 -m http.server`) — not opened as a raw `file://`.
 
 ---
 
