@@ -197,19 +197,9 @@
   /* =========================
      DOM
      ========================= */
-  const fab = document.createElement("button");
-  fab.type = "button";
-  fab.className = "cmdk-fab";
-  fab.setAttribute("aria-label", "Open command palette");
-  fab.innerHTML =
-    '<span class="cmdk-fab__icon" aria-hidden="true">⌘</span>' +
-    '<span class="cmdk-fab__keys">⌘K</span>';
-  document.body.appendChild(fab);
-
   const overlay = document.createElement("div");
   overlay.className = "cmdk";
   overlay.id = "commandPalette";
-  overlay.hidden = true;
   overlay.setAttribute("role", "dialog");
   overlay.setAttribute("aria-modal", "true");
   overlay.setAttribute("aria-label", "Command palette");
@@ -306,7 +296,7 @@
   let lastFocused = null;
   let prevOverflow = "";
 
-  const isOpen = () => !overlay.hidden;
+  const isOpen = () => overlay.classList.contains("is-open");
 
   function openPalette() {
     if (isOpen()) return;
@@ -316,30 +306,26 @@
     lastFocused = document.activeElement;
     prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    overlay.classList.remove("cmdk--closing");
-    overlay.hidden = false;
     render();
+    // element is already in the DOM (committed style), so adding the class
+    // triggers a reliable transition — no display:none → animation glitch
+    overlay.classList.add("is-open");
     setTimeout(() => input.focus(), reducedMotion ? 0 : 50);
   }
 
   function closePalette() {
     if (!isOpen()) return;
+    overlay.classList.remove("is-open");
     document.body.style.overflow = prevOverflow;
-    if (reducedMotion) {
-      overlay.hidden = true;
-    } else {
-      overlay.classList.add("cmdk--closing");
-      setTimeout(() => {
-        overlay.hidden = true;
-        overlay.classList.remove("cmdk--closing");
-      }, 220);
-    }
     if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
   }
 
   function toggle() {
     isOpen() ? closePalette() : openPalette();
   }
+
+  // Public API for nav button / features launcher
+  window.Palette = { open: openPalette, close: closePalette, toggle: toggle };
 
   /* =========================
      Toast
@@ -358,7 +344,8 @@
   /* =========================
      Wiring
      ========================= */
-  fab.addEventListener("click", openPalette);
+  const navSearchBtn = document.getElementById("navSearchBtn");
+  if (navSearchBtn) navSearchBtn.addEventListener("click", openPalette);
 
   overlay.addEventListener("mousedown", (e) => {
     if (e.target === overlay) closePalette();

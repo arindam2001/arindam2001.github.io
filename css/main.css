@@ -185,15 +185,12 @@ body {
   animation: pageIntro 0.8s var(--ease-out) both;
 }
 
+/* NOTE: animate opacity only. A `filter` (even blur(0)) left on <body>
+   via animation-fill makes it the containing block for position:fixed,
+   which breaks the sticky launcher and all viewport-centered overlays. */
 @keyframes pageIntro {
-  from {
-    opacity: 0;
-    filter: blur(4px);
-  }
-  to {
-    opacity: 1;
-    filter: blur(0);
-  }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* =========================
@@ -2131,7 +2128,8 @@ a.contact-item:hover {
    ========================================================= */
 
 /* Toggle button */
-.theme-toggle {
+.theme-toggle,
+.nav-icon-btn {
   width: 40px;
   height: 40px;
   display: grid;
@@ -2145,15 +2143,20 @@ a.contact-item:hover {
   transition: transform var(--duration-fast) var(--ease-out),
               background var(--duration-fast) ease,
               border-color var(--duration-fast) ease,
-              color var(--duration-fast) ease;
+              color var(--duration-fast) ease,
+              box-shadow var(--duration-base) ease;
 }
 
-.theme-toggle:hover {
+.theme-toggle:hover,
+.nav-icon-btn:hover {
   transform: translateY(-1px);
   background: rgba(34, 211, 238, 0.08);
   border-color: rgba(34, 211, 238, 0.25);
   color: var(--accent);
+  box-shadow: 0 4px 16px rgba(34, 211, 238, 0.12);
 }
+
+.nav-icon-btn:active { transform: translateY(0) scale(0.94); }
 
 .theme-toggle__icon { display: block; }
 .theme-toggle__sun { display: none; }

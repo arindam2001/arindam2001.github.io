@@ -137,7 +137,6 @@
   const overlay = document.createElement("div");
   overlay.className = "term";
   overlay.id = "terminal";
-  overlay.hidden = true;
   overlay.setAttribute("role", "dialog");
   overlay.setAttribute("aria-modal", "true");
   overlay.setAttribute("aria-label", "Terminal mode");
@@ -470,7 +469,7 @@
       missionEl = null;
     }
     document.removeEventListener("keydown", missionKey, true);
-    if (!overlay.hidden && input) input.focus();
+    if (overlay.classList.contains("is-open") && input) input.focus();
   }
 
   function missionKey(e) {
@@ -660,7 +659,7 @@
   let prevOverflow = "";
 
   function isOpen() {
-    return !overlay.hidden;
+    return overlay.classList.contains("is-open");
   }
 
   function openTerm() {
@@ -668,9 +667,9 @@
     lastFocused = document.activeElement;
     prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    overlay.classList.remove("term--closing");
-    overlay.hidden = false; // CSS animation handles the entrance
     if (!histEl.childElementCount) printWelcome();
+    // element already in DOM → class toggle gives a reliable transition
+    overlay.classList.add("is-open");
     setTimeout(() => input.focus(), reducedMotion ? 0 : 60);
     scrollBottom();
   }
@@ -679,21 +678,18 @@
     if (!isOpen()) return;
     closeMission();
     document.body.style.overflow = prevOverflow;
-    if (reducedMotion) {
-      overlay.hidden = true;
-    } else {
-      overlay.classList.add("term--closing");
-      setTimeout(() => {
-        overlay.hidden = true;
-        overlay.classList.remove("term--closing");
-      }, 240);
-    }
+    overlay.classList.remove("is-open");
     if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
   }
 
   function toggle() {
     isOpen() ? closeTerm() : openTerm();
   }
+
+  // Public API for nav button / features launcher
+  window.Terminal = { open: openTerm, close: closeTerm, toggle: toggle };
+  const navTermBtn = document.getElementById("navTerminalBtn");
+  if (navTermBtn) navTermBtn.addEventListener("click", openTerm);
 
   /* =========================
      Wiring

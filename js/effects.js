@@ -130,6 +130,8 @@
       raf = requestAnimationFrame(draw);
     }
 
+    FX.matrixOn = false;
+
     FX.toggleMatrix = function () {
       const hero = document.querySelector(".hero");
       if (!hero) return false;
@@ -157,16 +159,27 @@
         cancelAnimationFrame(raf);
         if (canvas) canvas.style.display = "none";
       }
+      FX.matrixOn = on;
       return on;
     };
+
+    // Default ON — visitors see the effect immediately (skip if the
+    // user prefers reduced motion; they can still toggle it on)
+    function autostart() {
+      if (!reduced && !on) FX.toggleMatrix();
+    }
+    if (document.readyState === "loading")
+      document.addEventListener("DOMContentLoaded", autostart);
+    else autostart();
   })();
 
   /* =======================================================
      3. System Monitor HUD
      ======================================================= */
   (function monitorModule() {
-    let hud, els, raf, frames = 0, lastSec = 0, fps = 0, on = false;
+    let hud, overlay, els, raf, frames = 0, lastSec = 0, fps = 0, on = false, prevOverflow = "";
     const start = performance.now();
+    FX.monitorOn = false;
 
     const LOGS = [
       "GET /#projects → 200",
@@ -184,11 +197,14 @@
     ];
 
     function build() {
+      overlay = document.createElement("div");
+      overlay.className = "fx-modal";
+      overlay.setAttribute("role", "dialog");
+      overlay.setAttribute("aria-modal", "true");
+      overlay.setAttribute("aria-label", "System monitor");
       hud = document.createElement("div");
       hud.className = "fx-hud";
-      hud.hidden = true;
       hud.setAttribute("role", "status");
-      hud.setAttribute("aria-label", "System monitor");
       hud.innerHTML =
         '<div class="fx-hud__bar"><span class="fx-hud__pulse"></span>' +
         '<span class="fx-hud__title">system monitor</span>' +
@@ -197,8 +213,12 @@
         cell("uptime", "up") + cell("fps", "fps") + cell("scroll", "scr") + cell("viewport", "vp") +
         "</div>" +
         '<div class="fx-hud__log" id="fxHudLog"></div>';
-      document.body.appendChild(hud);
+      overlay.appendChild(hud);
+      document.body.appendChild(overlay);
       hud.querySelector(".fx-hud__close").addEventListener("click", () => FX.toggleMonitor());
+      overlay.addEventListener("mousedown", (e) => {
+        if (e.target === overlay) FX.toggleMonitor();
+      });
       els = {
         up: hud.querySelector("#fx-up"),
         fps: hud.querySelector("#fx-fps"),
@@ -206,6 +226,14 @@
         vp: hud.querySelector("#fx-vp"),
         log: hud.querySelector("#fxHudLog"),
       };
+    }
+
+    function onKey(e) {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        e.stopPropagation();
+        FX.toggleMonitor();
+      }
     }
 
     function cell(label, id) {
@@ -256,10 +284,14 @@
     }
 
     FX.toggleMonitor = function () {
-      if (!hud) build();
+      if (!overlay) build();
       on = !on;
-      hud.hidden = !on;
+      FX.monitorOn = on;
       if (on) {
+        overlay.classList.add("is-open");
+        prevOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+        document.addEventListener("keydown", onKey, true);
         update();
         log();
         lastSec = performance.now();
@@ -267,6 +299,9 @@
         cancelAnimationFrame(raf);
         raf = requestAnimationFrame(loop);
       } else {
+        overlay.classList.remove("is-open");
+        document.body.style.overflow = prevOverflow;
+        document.removeEventListener("keydown", onKey, true);
         cancelAnimationFrame(raf);
       }
       return on;
@@ -372,8 +407,9 @@
   (function asciiModule() {
     const RAMP = " .:-=+*#%@";
     let pre, on = false, built = false;
+    FX.asciiOn = false;
 
-    function generate(img, frame) {
+    function generate(img) {
       const cols = 78;
       const ratio = (img.naturalHeight || img.height) / (img.naturalWidth || img.width) || 1;
       const rows = Math.max(1, Math.round(cols * ratio * 0.5));
@@ -386,7 +422,7 @@
       try {
         data = cx.getImageData(0, 0, cols, rows).data;
       } catch (e) {
-        return null; // tainted canvas (shouldn't happen for same-origin)
+        return null; // tainted canvas → served over file://
       }
       let out = "";
       for (let y = 0; y < rows; y++) {
@@ -397,43 +433,50 @@
         }
         out += "\n";
       }
-      // size the <pre> to fill the frame
-      const fpx = frame.clientWidth / cols / 0.6;
+      // size the <pre> so its characters fill the portrait frame
+      const w = img.clientWidth || (img.parentElement && img.parentElement.clientWidth) || 280;
+      const fpx = w / cols / 0.6;
       pre.style.fontSize = fpx.toFixed(2) + "px";
-      pre.style.lineHeight = (fpx * 1.0).toFixed(2) + "px";
+      pre.style.lineHeight = fpx.toFixed(2) + "px";
       return out;
     }
 
     FX.toggleAscii = function () {
       const img = document.querySelector(".profile-card__img");
       const frame = document.querySelector(".profile-card__frame");
+      const card = document.querySelector(".profile-card");
       if (!img || !frame) return false;
-      on = !on;
+
+      // turn OFF
       if (on) {
-        if (!built) {
-          pre = document.createElement("pre");
-          pre.className = "fx-ascii";
-          pre.setAttribute("aria-hidden", "true");
-          frame.appendChild(pre);
-          built = true;
-        }
-        const render = () => {
-          const art = generate(img, frame);
-          if (art == null) {
-            on = false;
-            return;
-          }
-          pre.textContent = art;
-          pre.classList.add("is-on");
-          img.style.visibility = "hidden";
-        };
-        if (img.complete && img.naturalWidth) render();
-        else img.addEventListener("load", render, { once: true });
-      } else {
+        on = false;
+        FX.asciiOn = false;
         if (pre) pre.classList.remove("is-on");
         img.style.visibility = "";
+        return false;
       }
-      return on;
+
+      // turn ON — bring the portrait into view, then render in place
+      if (card) card.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "center" });
+      if (!built) {
+        pre = document.createElement("pre");
+        pre.className = "fx-ascii";
+        pre.setAttribute("aria-hidden", "true");
+        frame.appendChild(pre);
+        built = true;
+      }
+      const render = () => {
+        const art = generate(img);
+        if (art == null) return; // file:// — can't read pixels
+        pre.textContent = art;
+        pre.classList.add("is-on");
+        img.style.visibility = "hidden";
+        on = true;
+        FX.asciiOn = true;
+      };
+      if (img.complete && img.naturalWidth) render();
+      else img.addEventListener("load", render, { once: true });
+      return true;
     };
   })();
 

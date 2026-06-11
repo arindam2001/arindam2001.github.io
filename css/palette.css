@@ -4,51 +4,8 @@
    Additive overlay; reuses the existing design tokens.
    ========================================================= */
 
-/* ===== Floating launcher (also the touch entry point) ===== */
-.cmdk-fab {
-  position: fixed;
-  right: max(var(--sp-5, 20px), env(safe-area-inset-right));
-  bottom: max(var(--sp-5, 20px), env(safe-area-inset-bottom));
-  z-index: 1400;
-  display: inline-flex;
-  align-items: center;
-  gap: var(--sp-2, 8px);
-  padding: 10px 14px;
-  border-radius: var(--radius-full, 999px);
-  border: 1px solid rgba(34, 211, 238, 0.25);
-  background: rgba(17, 24, 45, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: var(--muted, #a3b1c6);
-  font-family: var(--font, system-ui), sans-serif;
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: var(--shadow-sm, 0 4px 12px rgba(0, 0, 0, 0.25));
-  transition: transform 150ms ease, border-color 150ms ease,
-              color 150ms ease, box-shadow 250ms ease;
-}
-
-.cmdk-fab:hover {
-  transform: translateY(-2px);
-  color: var(--text, #f1f5f9);
-  border-color: rgba(34, 211, 238, 0.5);
-  box-shadow: 0 8px 28px rgba(34, 211, 238, 0.18);
-}
-
-.cmdk-fab__icon { font-size: 0.95rem; line-height: 1; }
-.cmdk-fab__keys {
-  display: inline-flex;
-  gap: 3px;
-  padding: 2px 7px;
-  border-radius: 6px;
-  background: rgba(148, 163, 184, 0.12);
-  color: var(--text-2, #e2e8f0);
-  font-family: ui-monospace, "Fira Code", Consolas, monospace;
-  font-size: 0.72rem;
-}
-
-/* ===== Overlay ===== */
+/* ===== Overlay (always in DOM; toggled via .is-open — no display:none
+   so the entrance is a reliable transition, never a stuck animation) ===== */
 .cmdk {
   position: fixed;
   inset: 0;
@@ -60,16 +17,20 @@
   background: rgba(6, 8, 15, 0.62);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  animation: cmdkOverlayIn var(--duration-base, 250ms) var(--ease-out, ease) both;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--duration-base, 250ms) var(--ease-out, ease),
+              visibility var(--duration-base, 250ms) var(--ease-out, ease);
 }
 
-.cmdk[hidden] { display: none; }
-
-.cmdk--closing {
-  animation: cmdkOverlayOut var(--duration-base, 250ms) var(--ease-out, ease) both;
+.cmdk.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
-/* ===== Panel ===== */
+/* ===== Panel (fancy spring pop-in) ===== */
 .cmdk__panel {
   width: min(560px, 96vw);
   max-height: min(70vh, 560px);
@@ -81,11 +42,15 @@
   border-radius: var(--radius-lg, 16px);
   box-shadow: var(--shadow-lg, 0 16px 48px rgba(0, 0, 0, 0.45)),
               0 0 70px rgba(34, 211, 238, 0.08);
-  animation: cmdkPanelIn var(--duration-base, 250ms) var(--ease-out, ease) both;
+  opacity: 0;
+  transform: translateY(-14px) scale(0.94);
+  transition: opacity var(--duration-base, 250ms) var(--ease-out, ease),
+              transform var(--duration-base, 250ms) var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1));
 }
 
-.cmdk--closing .cmdk__panel {
-  animation: cmdkPanelOut var(--duration-base, 250ms) var(--ease-out, ease) both;
+.cmdk.is-open .cmdk__panel {
+  opacity: 1;
+  transform: none;
 }
 
 /* ===== Search row ===== */
@@ -242,16 +207,6 @@
   animation: cmdkToast 1.9s var(--ease-out, ease) both;
 }
 
-@keyframes cmdkOverlayIn  { from { opacity: 0; } to { opacity: 1; } }
-@keyframes cmdkOverlayOut { from { opacity: 1; } to { opacity: 0; } }
-@keyframes cmdkPanelIn {
-  from { opacity: 0; transform: translateY(-10px) scale(0.98); }
-  to   { opacity: 1; transform: none; }
-}
-@keyframes cmdkPanelOut {
-  from { opacity: 1; transform: none; }
-  to   { opacity: 0; transform: translateY(-10px) scale(0.98); }
-}
 @keyframes cmdkToast {
   0%   { opacity: 0; transform: translateX(-50%) translateY(8px); }
   12%, 80% { opacity: 1; transform: translateX(-50%) translateY(0); }
@@ -261,15 +216,11 @@
 /* ===== Reduced motion ===== */
 @media (prefers-reduced-motion: reduce) {
   .cmdk,
-  .cmdk--closing,
   .cmdk__panel,
-  .cmdk--closing .cmdk__panel,
-  .cmdk-toast { animation: none; }
+  .cmdk-toast { transition: none; animation: none; }
 }
 
 /* ===== Mobile ===== */
 @media (max-width: 600px) {
   .cmdk { padding-top: 8vh; }
-  .cmdk-fab__keys { display: none; }
-  .cmdk-fab { padding: 12px; }
 }
