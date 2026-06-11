@@ -1959,17 +1959,47 @@ a.contact-item:hover {
 /* =========================================================
    MODERNIZATION LAYER — Phase 4: About Bento
    ========================================================= */
+/* Full-width intro lead + three equal-height cards below.
+   align-items:stretch makes the three cards equal height; each card's
+   content fills the height so there are no gaps. */
 .about__bento {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--sp-5);
-  align-items: start;
+  align-items: stretch;
 }
 
-.bento-tile--intro   { grid-column: 1 / 8; }
-.bento-tile--edu     { grid-column: 8 / 13; }
-.bento-tile--honours { grid-column: 1 / 8; }
-.bento-tile--thesis  { grid-column: 8 / 13; }
+/* Intro spans the full row; its text flows in readable columns */
+.bento-tile--intro {
+  grid-column: 1 / -1;
+  columns: 3 280px;
+  column-gap: var(--sp-8);
+}
+.bento-tile--intro p { break-inside: avoid; }
+.bento-tile--intro p:first-child { margin-top: 0; }
+
+/* Each lower card is a flex column so its body can fill the shared height */
+.bento-tile--edu,
+.bento-tile--honours,
+.bento-tile--thesis {
+  display: flex;
+  flex-direction: column;
+}
+
+/* honours single-column at this width; list fills the card */
+.about__bento .honours-list {
+  grid-template-columns: 1fr;
+  margin-block: auto;
+}
+
+/* education timeline + thesis media fill any extra height gracefully */
+.bento-tile--edu .timeline { margin-block: auto; }
+.bento-tile--thesis .highlight-card__media { margin-top: auto; }
+
+@media (max-width: 900px) {
+  .about__bento { grid-template-columns: 1fr; }
+  .bento-tile--intro { columns: 1; }
+}
 
 /* Subtle accent hairline at the top of each bento tile */
 .about__bento .bento-tile {
@@ -1992,10 +2022,7 @@ a.contact-item:hover {
   opacity: 1;
 }
 
-/* Honours go 2-up inside the wider tile */
-.about__bento .honours-list {
-  grid-template-columns: repeat(2, 1fr);
-}
+/* (honours list layout is defined in the About renovation block) */
 
 /* =========================================================
    MODERNIZATION LAYER — Phase 5: Projects Bento + Spotlight
@@ -2216,4 +2243,252 @@ a.contact-item:hover {
 /* Soften the ambient colour blobs on a light background */
 :root[data-theme="light"] .bg-blob__circle {
   opacity: 0.16;
+}
+
+/* =========================================================
+   HERO RENOVATION — more immersive, modern composition
+   ========================================================= */
+
+/* Full-height, vertically-centered hero */
+.hero {
+  min-height: calc(100svh - var(--nav-h));
+  display: grid;
+  align-items: center;
+  padding-block: var(--sp-12);
+}
+
+.hero__content {
+  max-width: 600px;
+}
+
+/* Top badge row — aligned, wraps gracefully */
+.hero__badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-6);
+}
+.hero__badges .eyebrow,
+.hero__badges .now-badge {
+  margin: 0;
+}
+
+/* Tighter, intentional rhythm */
+.hero__subtitle { margin-bottom: var(--sp-5); }
+.hero__desc { margin-bottom: var(--sp-8); }
+
+/* Meta + social sit together under a hairline for separation */
+.hero__meta {
+  margin-bottom: var(--sp-5);
+  padding-top: var(--sp-6);
+  border-top: 1px solid var(--border);
+}
+
+/* ---- Profile card: premium, full-bleed portrait ---- */
+.hero__media { perspective: 1200px; }
+
+.profile-card {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  margin-inline: auto;
+  border-radius: var(--radius-2xl);
+  border: 1.5px solid transparent;
+  background:
+    linear-gradient(var(--surface), var(--surface)) padding-box,
+    linear-gradient(150deg,
+      rgba(34, 211, 238, 0.65),
+      rgba(167, 139, 250, 0.45) 55%,
+      rgba(34, 211, 238, 0.12)) border-box;
+  box-shadow: var(--shadow-lg), 0 0 70px rgba(34, 211, 238, 0.08);
+}
+
+.profile-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg), 0 0 100px rgba(34, 211, 238, 0.16);
+}
+
+.profile-card__frame {
+  aspect-ratio: 4 / 5;
+  padding: 0;
+  background: var(--surface-2);
+}
+
+.profile-card__img {
+  border-radius: 0;
+}
+
+/* Name / role overlaid on the photo with a gradient scrim */
+.profile-card__info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: var(--sp-12) var(--sp-5) var(--sp-5);
+  background: linear-gradient(to top,
+    rgba(6, 8, 15, 0.96),
+    rgba(6, 8, 15, 0.55) 55%,
+    transparent);
+}
+
+.profile-card__info::before {
+  content: "";
+  display: block;
+  width: 34px;
+  height: 3px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  margin-bottom: var(--sp-3);
+}
+
+.profile-card__name {
+  color: #fff;
+  font-size: var(--fs-xl);
+}
+
+.profile-card__role {
+  color: rgba(226, 232, 240, 0.78);
+}
+
+@media (max-width: 1024px) {
+  .hero { min-height: auto; }
+  .hero__content { max-width: none; }
+}
+
+/* =========================================================
+   HERO PORTRAIT BREAKOUT
+   Transparent cutout standing free (no box) over a glowing
+   portal disc, ground glow, aura drop-shadow + gentle float.
+   ========================================================= */
+
+/* Strip the card box entirely */
+.profile-card {
+  position: relative;
+  background: none;
+  border: none;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-radius: 0;
+  overflow: visible;
+  max-width: 440px;
+}
+.profile-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Stage that holds the disc + person */
+.profile-card__frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background: none;
+  padding: 0;
+  display: grid;
+  place-items: end center;
+  overflow: visible;
+}
+
+/* Soft gradient "portal" glow behind the torso */
+.profile-card__frame::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  width: 92%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 45%,
+    rgba(34, 211, 238, 0.30),
+    rgba(167, 139, 250, 0.18) 46%,
+    transparent 70%);
+  filter: blur(8px);
+  z-index: 0;
+  animation: portalPulse 7s var(--ease-out) infinite alternate;
+}
+
+/* Crisp ring around the portal */
+.profile-card__frame::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  width: 80%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1.5px solid rgba(34, 211, 238, 0.22);
+  box-shadow: inset 0 0 70px rgba(34, 211, 238, 0.08),
+              0 0 40px rgba(167, 139, 250, 0.06);
+  z-index: 0;
+}
+
+/* The free-standing cutout — zoomed, glowing, floating */
+.profile-card__img {
+  position: relative;
+  z-index: 1;
+  width: auto;
+  height: 126%;
+  max-width: none;
+  object-fit: contain;
+  object-position: bottom center;
+  border-radius: 0;
+  filter:
+    drop-shadow(0 18px 28px rgba(0, 0, 0, 0.55))
+    drop-shadow(0 0 26px rgba(34, 211, 238, 0.20));
+  /* fade the cropped torso into the page so it doesn't look cut off */
+  -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent 99%);
+  mask-image: linear-gradient(to bottom, #000 78%, transparent 99%);
+  animation: heroFloat 6s ease-in-out infinite alternate;
+}
+
+/* Glowing ground ellipse beneath the portrait */
+.profile-card::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 1%;
+  width: 56%;
+  height: 26px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(34, 211, 238, 0.40), transparent 72%);
+  filter: blur(10px);
+  z-index: 0;
+  animation: groundPulse 6s ease-in-out infinite alternate;
+}
+
+/* Floating glass name tag */
+.profile-card__info {
+  position: absolute;
+  left: 0;
+  bottom: 6%;
+  z-index: 3;
+  padding: var(--sp-3) var(--sp-4);
+  background: rgba(11, 17, 32, 0.66);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  border-radius: var(--radius-lg);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow), 0 0 26px rgba(34, 211, 238, 0.08);
+}
+
+.profile-card__info::before {
+  margin-bottom: var(--sp-2);
+}
+
+.profile-card__name { color: #fff; }
+.profile-card__role { color: rgba(226, 232, 240, 0.78); }
+
+@keyframes heroFloat   { from { transform: translateY(0); }        to { transform: translateY(-14px); } }
+@keyframes portalPulse { from { opacity: 0.75; transform: translate(-50%, -50%) scale(0.96); }
+                         to   { opacity: 1;    transform: translate(-50%, -50%) scale(1.05); } }
+@keyframes groundPulse { from { opacity: 0.5; width: 52%; } to { opacity: 0.85; width: 60%; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-card__img,
+  .profile-card__frame::before,
+  .profile-card::after { animation: none; }
 }
